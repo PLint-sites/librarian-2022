@@ -1,10 +1,6 @@
 <template>
-    <Head title="Register" />
-
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+    <auth-layout>
+        <Head title="Register" />
 
         <jet-validation-errors class="mb-4" />
 
@@ -51,13 +47,12 @@
                 </jet-button>
             </div>
         </form>
-    </jet-authentication-card>
+    </auth-layout>
 </template>
 
 <script>
     import { defineComponent } from 'vue'
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
+    import AuthLayout from '@/Layouts/AuthLayout.vue'
     import JetButton from '@/Jetstream/Button.vue'
     import JetInput from '@/Jetstream/Input.vue'
     import JetCheckbox from '@/Jetstream/Checkbox.vue'
@@ -68,8 +63,7 @@
     export default defineComponent({
         components: {
             Head,
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
+            AuthLayout,
             JetButton,
             JetInput,
             JetCheckbox,

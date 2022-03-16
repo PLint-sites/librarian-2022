@@ -23849,7 +23849,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 booksCount = _yield$axios$get$data.booksCount;
 
                 if (!(booksCount > 0 && books.length)) {
-                  _context.next = 11;
+                  _context.next = 12;
                   break;
                 }
 
@@ -23857,40 +23857,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 (_this2$bookList = _this2.bookList).push.apply(_this2$bookList, _toConsumableArray(books));
 
+                _this2.redrawMasonry();
+
                 _this2.page += 1;
                 return _context.abrupt("return", books.length !== _this2.perPage);
 
-              case 11:
+              case 12:
                 return _context.abrupt("return", true);
 
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    initMasonry: function initMasonry() {
+      this.masonry = new minimasonry__WEBPACK_IMPORTED_MODULE_8__["default"]({
+        container: '#booklist',
+        baseWidth: 150,
+        minify: false,
+        gutter: this.smartphoneSize ? 5 : 20,
+        wedge: true
+      });
+    },
+    redrawMasonry: function redrawMasonry() {
+      var _this3 = this;
+
+      this.$nextTick(function () {
+        _this3.masonry.layout();
+      });
     }
   },
   watch: {
     books: function books(list) {
       this.bookList = list;
+      this.redrawMasonry();
     },
     booksCount: function booksCount(amount) {
       this.numberOfBooks = amount;
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     // Setup Intersection observer API for lazy loading more books on scroll
     var observer = new IntersectionObserver(function (entries, observer) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           // not when search is applied
-          if (!_this3.isSearching) {
-            _this3.loadMoreBooks().then(function (shouldUnobserve) {
-              _this3.masonry.layout();
+          if (!_this4.isSearching) {
+            _this4.loadMoreBooks().then(function (shouldUnobserve) {
+              _this4.redrawMasonry();
 
               if (shouldUnobserve) observer.unobserve(entry.target);
             })["catch"](function (err) {
@@ -23915,17 +23934,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     } // Setup MiniMasonry
 
 
-    this.masonry = new minimasonry__WEBPACK_IMPORTED_MODULE_8__["default"]({
-      container: '#booklist',
-      baseWidth: 150,
-      minify: false,
-      gutter: this.smartphoneSize ? 5 : 20
-    });
+    this.initMasonry();
   },
   updated: function updated() {
     // when a book is removed in the edit book modal, the /books endpoint is called again
     // and this page is rerendered and we need to relayout masonry.
-    this.masonry.layout();
+    this.redrawMasonry();
   }
 });
 
@@ -29773,7 +29787,6 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  key: 0,
   id: "booklist"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -29782,10 +29795,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_BookHeaderDesktop = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BookHeaderDesktop");
 
   var _component_Book = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Book");
-
-  var _component_NoSearchResult = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NoSearchResult");
-
-  var _component_NoBookYet = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NoBookYet");
 
   var _component_AddBookModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AddBookModal");
 
@@ -29818,7 +29827,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["booksCount", "has-books", "onFilterBooks", "onResetFilter"]))];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [$options.hasBooksToShow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.bookList, function (book) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.bookList, function (book) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Book, {
           key: book.id,
           book: book,
@@ -29829,21 +29838,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["book", "writers", "genres"]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])) : $options.listIsFiltered ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_NoSearchResult, {
-        key: 1,
-        search: $data.search
-      }, null, 8
-      /* PROPS */
-      , ["search"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_NoBookYet, {
-        key: 2,
-        onShowModal: _cache[2] || (_cache[2] = function ($event) {
-          return $data.showAddBookModal = true;
-        })
-      })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddBookModal, {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddBookModal, {
         "show-add-book-modal": $data.showAddBookModal,
         writers: $props.writers,
         genres: $props.genres,
-        onModalClosed: _cache[3] || (_cache[3] = function ($event) {
+        onModalClosed: _cache[2] || (_cache[2] = function ($event) {
           return $data.showAddBookModal = false;
         })
       }, null, 8

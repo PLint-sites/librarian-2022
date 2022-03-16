@@ -19,13 +19,17 @@
             />
         </template>
 
-        <div v-if="hasBooksToShow" id="booklist">
+        <div id="booklist">
+            <Book v-for="book in bookList" :key="book.id" :book="book" :writers="writers" :genres="genres"/>
+        </div>
+
+        <!-- <div v-if="hasBooksToShow" id="booklist">
             <Book v-for="book in bookList" :key="book.id" :book="book" :writers="writers" :genres="genres"/>
         </div>
 
         <NoSearchResult :search="search" v-else-if="listIsFiltered"/>
 
-        <NoBookYet v-else @show-modal="showAddBookModal = true"/>
+        <NoBookYet v-else @show-modal="showAddBookModal = true"/> -->
 
         <AddBookModal :show-add-book-modal="showAddBookModal" :writers="writers" :genres="genres" @modal-closed="showAddBookModal = false"/>
     </app-layout>
@@ -94,24 +98,43 @@ export default {
             this.search = ''
             this.page = 0
             this.bookList = []
+
             this.loadMoreBooks()
         },
         async loadMoreBooks() {
             const {data: {books, booksCount}} = await axios.get(`/books/draw/${this.page}/${this.search}`)
             
-            // if (books.length) {
             if (booksCount > 0 && books.length) {
                 this.numberOfBooks = booksCount
                 this.bookList.push(...books)
+
+                this.redrawMasonry()
+
                 this.page += 1
                 return books.length !== this.perPage
             } 
             return true
         },
+        initMasonry() {
+            this.masonry = new MiniMasonry({
+                container: '#booklist',
+                baseWidth: 150,
+                minify: false,
+                gutter: this.smartphoneSize ? 5 : 20,
+                wedge: true,
+            }); 
+        },
+        redrawMasonry() {
+            this.$nextTick(() => {
+                this.masonry.layout()
+            })
+        },
     },
     watch: {
         books(list) {
             this.bookList = list
+
+            this.redrawMasonry()
         },
         booksCount(amount) {
             this.numberOfBooks = amount
@@ -127,7 +150,7 @@ export default {
                         if (!this.isSearching) {
                             this.loadMoreBooks()
                             .then(shouldUnobserve => {
-                                this.masonry.layout()
+                                this.redrawMasonry()
                                 if (shouldUnobserve) observer.unobserve(entry.target)
                             })
                             .catch(err => console.log(err))
@@ -154,17 +177,12 @@ export default {
         }
 
         // Setup MiniMasonry
-        this.masonry = new MiniMasonry({
-            container: '#booklist',
-            baseWidth: 150,
-            minify: false,
-            gutter: this.smartphoneSize ? 5 : 20,
-        }); 
+        this.initMasonry()
     },
     updated() {
         // when a book is removed in the edit book modal, the /books endpoint is called again
         // and this page is rerendered and we need to relayout masonry.
-        this.masonry.layout()
+        this.redrawMasonry()
     },
 }
 </script>

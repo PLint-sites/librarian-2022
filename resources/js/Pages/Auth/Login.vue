@@ -26,10 +26,16 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
-                </Link>
+            <div id="buttons">
+                <div class="links">
+                    <Link :href="route('register')" class="underline text-sm text-gray-600 hover:text-gray-900 mr-4">
+                        Not registered?
+                    </Link>
+
+                    <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                        Forgot your password?
+                    </Link>
+                </div>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
@@ -90,3 +96,21 @@
         }
     })
 </script>
+
+<style scoped lang="less">
+#buttons {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-top: 1rem;
+
+    .links {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 5px;
+    }
+
+    button {
+        justify-self: end;
+    }
+}
+</style>

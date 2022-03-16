@@ -59,9 +59,13 @@
                                         </jet-dropdown-link>
 
                                         <div>
-                                            <inertia-link method="post" :href="route('logout')" as="button" class="uppercase block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                            <!-- <inertia-link method="post" :href="route('logout')" as="button" class="uppercase block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                                                 Log Out
-                                            </inertia-link>
+                                            </inertia-link> -->
+
+                                            <jet-nav-link :href="route('logout')" method="post" as="button" class="uppercase block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                                Log out
+                                            </jet-nav-link>
                                         </div>
                                     </template>
                                 </jet-dropdown>
@@ -106,9 +110,9 @@
 
                             <!-- Authentication -->
                             <div>
-                                <inertia-link method="post" :href="route('logout')" as="button" class="w-full text-left block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">
+                                <jet-responsive-nav-link method="post" :href="route('logout')" as="button" class="w-full text-left block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">
                                     <i class="fas fa-sign-out-alt"></i> Log Out
-                                </inertia-link>   
+                                </jet-responsive-nav-link>   
                             </div>
 
                         </div>

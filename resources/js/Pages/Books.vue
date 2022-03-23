@@ -19,17 +19,13 @@
             />
         </template>
 
+        <NoSearchResult v-if="isSearching && !hasSearchResults" :search="search" />
+
         <div id="booklist">
             <Book v-for="book in bookList" :key="book.id" :book="book" :writers="writers" :genres="genres"/>
         </div>
 
-        <!-- <div v-if="hasBooksToShow" id="booklist">
-            <Book v-for="book in bookList" :key="book.id" :book="book" :writers="writers" :genres="genres"/>
-        </div>
-
-        <NoSearchResult :search="search" v-else-if="listIsFiltered"/>
-
-        <NoBookYet v-else @show-modal="showAddBookModal = true"/> -->
+        <NoBookYet v-if="!isSearching && isBooklistEmpty" @show-modal="showAddBookModal = true"/>
 
         <AddBookModal :show-add-book-modal="showAddBookModal" :writers="writers" :genres="genres" @modal-closed="showAddBookModal = false"/>
     </app-layout>
@@ -67,6 +63,7 @@ export default {
             desktopSize: null,
             search: '',
             isSearching: false,
+            hasSearchResults: false,
             masonry: null,
         }
     },
@@ -74,11 +71,8 @@ export default {
         userHasBooks() {
             return this.booksCount > 0
         },
-        hasBooksToShow() {
-            return this.bookList.length > 0
-        },
-        listIsFiltered() {
-            return this.search.length > 0
+        isBooklistEmpty() {
+            return this.bookList.length === 0
         },
     },
     methods: {
@@ -92,7 +86,6 @@ export default {
 
             // call API
             this.loadMoreBooks()
-            .then(() => this.isSearching = false)
         },
         resetFilter() {
             this.search = ''
@@ -100,9 +93,18 @@ export default {
             this.bookList = []
 
             this.loadMoreBooks()
+            .then(() => {
+                this.isSearching = false
+                this.hasSearchResults = false
+            })
         },
         async loadMoreBooks() {
             const {data: {books, booksCount}} = await axios.get(`/books/draw/${this.page}/${this.search}`)
+
+            if (this.search.length > 0) {
+                // er is gezocht
+                this.hasSearchResults = booksCount > 0
+            } 
             
             if (booksCount > 0 && books.length) {
                 this.numberOfBooks = booksCount
@@ -151,7 +153,10 @@ export default {
                             this.loadMoreBooks()
                             .then(shouldUnobserve => {
                                 this.redrawMasonry()
-                                if (shouldUnobserve) observer.unobserve(entry.target)
+                                if (shouldUnobserve) {
+                                    console.log('stop observing')
+                                    observer.unobserve(entry.target)
+                                }
                             })
                             .catch(err => console.log(err))
                         }

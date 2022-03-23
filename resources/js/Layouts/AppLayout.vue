@@ -50,7 +50,7 @@
                                         </jet-dropdown-link>
 
                                         <div>
-                                            <jet-nav-link id="logout-link" :href="route('logout')" method="post" as="button" class="uppercase block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                            <jet-nav-link id="logout-link" :href="route('logout')" method="post" class="uppercase block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                                                 <i class="fas fa-sign-out-alt"></i> Log out
                                             </jet-nav-link>
                                         </div>
@@ -77,32 +77,20 @@
                         <jet-responsive-nav-link :href="route('books')" :active="route().current('books')">
                             <i class="fas fa-book"></i> Books
                         </jet-responsive-nav-link>
+
                         <jet-responsive-nav-link :href="route('writers')" :active="route().current('writers')">
                             <i class="fas fa-pencil-alt"></i> Writers
                         </jet-responsive-nav-link>
-                    </div>
 
-                    <!-- Responsive Settings Options -->
-                    <div v-if="$page.props.user" class="border-t border-gray-200">
-                        <div class="flex items-center px-4">
-                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
-                                <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
-                            </div>
-                        </div>
+                        <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
+                            <i class="fas fa-user"></i> Profile
+                        </jet-responsive-nav-link>
 
-                        <div class="space-y-1">
-                            <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                <i class="fas fa-user"></i> Profile
-                            </jet-responsive-nav-link>
+                        <!-- For some reason, jet-responsive-nav-link does not work as button, use a inertia Link directly with classes copied from jet-responsive-nav-link -->
+                        <Link :href="route('logout')" method="post" as="button" type="button" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </Link>
 
-                            <!-- Authentication -->
-                            <div>
-                                <jet-responsive-nav-link method="post" :href="route('logout')" as="button" class="w-full text-left block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    <i class="fas fa-sign-out-alt"></i> Log Out
-                                </jet-responsive-nav-link>   
-                            </div>
-
-                        </div>
                     </div>
                 </div>
             </nav>
@@ -140,12 +128,15 @@ import JetDropdownLink from '@/Jetstream/DropdownLink'
 import JetNavLink from '@/Jetstream/NavLink'
 import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
 
+import { Link } from '@inertiajs/inertia-vue3';
+
 export default {
     components: {
         JetDropdown,
         JetDropdownLink,
         JetNavLink,
         JetResponsiveNavLink,
+        Link,
     },
     data() {
         return {

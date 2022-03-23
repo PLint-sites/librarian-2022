@@ -22,15 +22,6 @@
                                     <i class="fas fa-pencil-alt"></i> Writers
                                 </jet-nav-link>
                             </div>
-
-                            <div v-else class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('login')" :active="route().current('login')">
-                                    <i class="fas fa-user"></i> Log in
-                                </jet-nav-link>
-                                <jet-nav-link :href="route('register')" :active="route().current('register')">
-                                    <i class="fas fa-user-plus"></i> Register
-                                </jet-nav-link>
-                            </div>
                         </div>
 
                         <div v-if="$page.props.user" class="hidden sm:flex sm:items-center sm:ml-6">
@@ -55,16 +46,12 @@
 
                                     <template #content>
                                         <jet-dropdown-link :href="route('profile.show')">
-                                            Profile
+                                            <i class="fas fa-user"></i> Profile
                                         </jet-dropdown-link>
 
                                         <div>
-                                            <!-- <inertia-link method="post" :href="route('logout')" as="button" class="uppercase block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
-                                                Log Out
-                                            </inertia-link> -->
-
-                                            <jet-nav-link :href="route('logout')" method="post" as="button" class="uppercase block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
-                                                Log out
+                                            <jet-nav-link id="logout-link" :href="route('logout')" method="post" as="button" class="uppercase block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                                <i class="fas fa-sign-out-alt"></i> Log out
                                             </jet-nav-link>
                                         </div>
                                     </template>
@@ -238,14 +225,21 @@ nav {
         font-weight: bold;
     }
 
+    a, button {
+        i {
+            margin-right: 5px;
+        }
+    }
+
     a {
         text-transform: uppercase;
         color: yellow;
         border-color: yellow;
+    }
 
-        i {
-            margin-right: 5px;
-        }
+    #logout-link {
+        padding: 0.5rem 1rem;
+        color: rgb(55 65 81 / var(--tw-text-opacity));
     }
 
     #mobile-menu {

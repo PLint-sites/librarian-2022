@@ -55,6 +55,8 @@ export default {
     props: ['books', 'booksCount', 'writers', 'genres', 'perPage'],
     data() {
         return {
+            observer: null,
+            isObserving: false,
             showAddBookModal: false,
             bookList: this.books,
             numberOfBooks: this.booksCount,
@@ -96,6 +98,11 @@ export default {
             .then(() => {
                 this.isSearching = false
                 this.hasSearchResults = false
+
+                if (!this.isObserving) {
+                    this.observer.observe(document.querySelector('footer'))
+                    this.isObserving = true
+                }
             })
         },
         async loadMoreBooks() {
@@ -144,7 +151,7 @@ export default {
     },
     mounted() {
         // Setup Intersection observer API for lazy loading more books on scroll
-        let observer = new IntersectionObserver(
+        this.observer = new IntersectionObserver(
             (entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -154,8 +161,8 @@ export default {
                             .then(shouldUnobserve => {
                                 this.redrawMasonry()
                                 if (shouldUnobserve) {
-                                    console.log('stop observing')
                                     observer.unobserve(entry.target)
+                                    this.isObserving = false
                                 }
                             })
                             .catch(err => console.log(err))
@@ -168,7 +175,8 @@ export default {
             }
         );
 
-        observer.observe(document.querySelector('footer'))
+        this.observer.observe(document.querySelector('footer'))
+        this.isObserving = true
 
         // MatchMedia 
         const mediaQuery = window.matchMedia('(max-width: 767px)')

@@ -23789,6 +23789,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['books', 'booksCount', 'writers', 'genres', 'perPage'],
   data: function data() {
     return {
+      observer: null,
+      isObserving: false,
       showAddBookModal: false,
       bookList: this.books,
       numberOfBooks: this.booksCount,
@@ -23829,6 +23831,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.loadMoreBooks().then(function () {
         _this.isSearching = false;
         _this.hasSearchResults = false;
+
+        if (!_this.isObserving) {
+          _this.observer.observe(document.querySelector('footer'));
+
+          _this.isObserving = true;
+        }
       });
     },
     loadMoreBooks: function loadMoreBooks() {
@@ -23910,7 +23918,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this4 = this;
 
     // Setup Intersection observer API for lazy loading more books on scroll
-    var observer = new IntersectionObserver(function (entries, observer) {
+    this.observer = new IntersectionObserver(function (entries, observer) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           // not when search is applied
@@ -23919,8 +23927,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this4.redrawMasonry();
 
               if (shouldUnobserve) {
-                console.log('stop observing');
                 observer.unobserve(entry.target);
+                _this4.isObserving = false;
               }
             })["catch"](function (err) {
               return console.log(err);
@@ -23931,7 +23939,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }, {
       threshold: [0.5]
     });
-    observer.observe(document.querySelector('footer')); // MatchMedia 
+    this.observer.observe(document.querySelector('footer'));
+    this.isObserving = true; // MatchMedia 
 
     var mediaQuery = window.matchMedia('(max-width: 767px)'); // Check if the media query is true
 

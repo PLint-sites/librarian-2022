@@ -25866,6 +25866,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ComboboxInput, {
+        className: "w-full",
         onChange: _cache[0] || (_cache[0] = function ($event) {
           return $data.query = $event.target.value;
         }),
@@ -25877,14 +25878,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["displayValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ComboboxOptions, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.filteredWriters, function (writer) {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Use the `active` state to conditionally style the active option. "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Use the `selected` state to conditionally style the selected option. "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.filteredWriters, function (writer) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ComboboxOption, {
+              as: "template",
               key: writer.id,
               value: writer
             }, {
-              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(writer.name), 1
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
+                var active = _ref.active,
+                    selected = _ref.selected;
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+                    'bg-amber-500 text-purple-500': active && selected,
+                    'bg-purple-500 text-amber-500': active,
+                    'bg-white text-black': !active
+                  })
+                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fas fa-check-circle text-purple-500", {
+                    'text-purple-800': selected && active
+                  }])
+                }, null, 2
+                /* CLASS */
+                ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, selected]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(writer.name), 1
                 /* TEXT */
+                )], 2
+                /* CLASS */
                 )];
               }),
               _: 2

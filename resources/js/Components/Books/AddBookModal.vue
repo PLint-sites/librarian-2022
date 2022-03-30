@@ -17,11 +17,11 @@
                 <div class="form-group">
                     <label for="book_writer">Writer</label>
 
-                    <!-- <AutoSelectWriterVue :writers="writers" /> -->
-                    <select id="book_writer" v-model="form.writer_id" @focus="clearError('writer_id')">
+                    <SelectWriterComboBox :writers="writers"/>
+                    <!-- <select id="book_writer" v-model="form.writer_id" @focus="clearError('writer_id')">
                         <option disabled value="">Select writer</option>
                         <option v-for="writer in writers" :key="writer.id" :value="writer.id">{{ writer.name }}</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div v-if="form.errors.writer_id" class="mb-2 text-red-500">{{ form.errors.writer_id }}</div>
 
@@ -67,7 +67,7 @@
 import JetDialogModal from '@/Jetstream/DialogModal'
 import JetButton from '@/Jetstream/Button'
 import JetActionMessage from '@/Jetstream/ActionMessage'
-import AutoSelectWriterVue from './AutoSelectWriter.vue'
+import SelectWriterComboBox from './SelectWriterComboBox.vue'
 
 export default {
     name: 'AddBookModal',
@@ -75,7 +75,7 @@ export default {
         JetDialogModal,
         JetButton,
         JetActionMessage,
-        AutoSelectWriterVue
+        SelectWriterComboBox,
     },
     props: ['showAddBookModal', 'writers', 'genres'],
     data() {

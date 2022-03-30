@@ -24,6 +24,9 @@ Route::get('/', function () {
 
 // Logged in
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::get('/', function () {
+        return redirect(route('books'));
+    });
     // On boarding
     Route::get('add-your-first-book', [App\Http\Controllers\BoardingController::class, 'addYourFirstBook']);
     Route::post('book-and-writer', [App\Http\Controllers\BoardingController::class, 'storeBookAndWriter']);

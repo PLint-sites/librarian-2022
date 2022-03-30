@@ -21602,6 +21602,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.form.hasErrors) {
         this.form.clearErrors(field);
       }
+    },
+    setWriterChosen: function setWriterChosen(_ref) {
+      var writerId = _ref.id;
+      this.form.writer_id = writerId;
     }
   },
   watch: {
@@ -21910,7 +21914,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       query: '',
-      // selectedWriter: this.writers[0],
       selectedWriter: null
     };
   },
@@ -21920,6 +21923,13 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.query.value === '' ? this.writers : this.writers.filter(function (writer) {
         return writer.name.toLowerCase().includes(_this.query.toLowerCase());
+      });
+    }
+  },
+  watch: {
+    selectedWriter: function selectedWriter(chosenWriter) {
+      this.$emit('writer-chosen', {
+        id: chosenWriter.id
       });
     }
   }
@@ -25085,10 +25095,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.title]])]), $data.form.errors.title ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.errors.title), 1
       /* TEXT */
       )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" writer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectWriterComboBox, {
-        writers: $props.writers
+        writers: $props.writers,
+        onWriterChosen: $options.setWriterChosen
       }, null, 8
       /* PROPS */
-      , ["writers"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <select id=\"book_writer\" v-model=\"form.writer_id\" @focus=\"clearError('writer_id')\">\n                        <option disabled value=\"\">Select writer</option>\n                        <option v-for=\"writer in writers\" :key=\"writer.id\" :value=\"writer.id\">{{ writer.name }}</option>\n                    </select> ")]), $data.form.errors.writer_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.errors.writer_id), 1
+      , ["writers", "onWriterChosen"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <select id=\"book_writer\" v-model=\"form.writer_id\" @focus=\"clearError('writer_id')\">\n                        <option disabled value=\"\">Select writer</option>\n                        <option v-for=\"writer in writers\" :key=\"writer.id\" :value=\"writer.id\">{{ writer.name }}</option>\n                    </select> ")]), $data.form.errors.writer_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.errors.writer_id), 1
       /* TEXT */
       )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" genre "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
         id: "book_genre",
@@ -25876,9 +25887,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         placeholder: "Start typing writer's name"
       }, null, 8
       /* PROPS */
-      , ["displayValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ComboboxOptions, null, {
+      , ["displayValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ComboboxOptions, {
+        className: "fixed h-auto max-h-60 z-10 w-3/4 text-sm overflow-y-auto border border-purple-300 py-2 my-1"
+      }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Use the `active` state to conditionally style the active option. "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Use the `selected` state to conditionally style the selected option. "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.filteredWriters, function (writer) {
+          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.filteredWriters, function (writer) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ComboboxOption, {
               as: "template",
               key: writer.id,
@@ -25888,14 +25901,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 var active = _ref.active,
                     selected = _ref.selected;
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-3 py-1", {
                     'bg-amber-500 text-purple-500': active && selected,
                     'bg-purple-500 text-amber-500': active,
                     'bg-white text-black': !active
-                  })
+                  }])
                 }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
                   "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fas fa-check-circle text-purple-500", {
-                    'text-purple-800': selected && active
+                    'text-amber-500': selected && active
                   }])
                 }, null, 2
                 /* CLASS */

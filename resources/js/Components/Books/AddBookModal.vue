@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label for="book_writer">Writer</label>
 
-                    <SelectWriterComboBox :writers="writers"/>
+                    <SelectWriterComboBox :writers="writers" @writer-chosen="setWriterChosen"/>
                     <!-- <select id="book_writer" v-model="form.writer_id" @focus="clearError('writer_id')">
                         <option disabled value="">Select writer</option>
                         <option v-for="writer in writers" :key="writer.id" :value="writer.id">{{ writer.name }}</option>
@@ -118,6 +118,9 @@ export default {
             if (this.form.hasErrors) {
                 this.form.clearErrors(field)
             }
+        },
+        setWriterChosen({id: writerId}) {
+            this.form.writer_id = writerId
         },
     },
     watch: {

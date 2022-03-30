@@ -7,9 +7,9 @@
                 :displayValue="(writer) => writer ? writer.name : ''"
                 placeholder="Start typing writer's name"
             />
-            <ComboboxOptions>
-                <!-- Use the `active` state to conditionally style the active option. -->
-                <!-- Use the `selected` state to conditionally style the selected option. -->
+            <ComboboxOptions
+                className="fixed h-auto max-h-60 z-10 w-3/4 text-sm overflow-y-auto border border-purple-300 py-2 my-1"
+            >
                 <ComboboxOption
                     as="template"
                     v-slot="{ active, selected }"
@@ -18,6 +18,7 @@
                     :value="writer"
                 >
                     <li
+                        class="px-3 py-1"
                         :class="{
                             'bg-amber-500 text-purple-500': active && selected,
                             'bg-purple-500 text-amber-500': active,
@@ -26,7 +27,7 @@
                     >
                         <i class="fas fa-check-circle text-purple-500" 
                             :class="{
-                                'text-purple-800': selected && active,
+                                'text-amber-500': selected && active,
                             }" 
                             v-show="selected"
                         ></i>
@@ -58,7 +59,6 @@ export default {
     data() {
         return {
             query: '',
-            // selectedWriter: this.writers[0],
             selectedWriter: null,
         }
     },
@@ -67,6 +67,11 @@ export default {
             return this.query.value === '' ? this.writers : this.writers.filter(writer => {
                 return writer.name.toLowerCase().includes(this.query.toLowerCase())
             })
+        },
+    },
+    watch: {
+        selectedWriter(chosenWriter) {
+            this.$emit('writer-chosen', {id: chosenWriter.id})
         },
     },
 }

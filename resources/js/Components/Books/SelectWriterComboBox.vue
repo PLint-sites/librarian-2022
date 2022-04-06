@@ -8,9 +8,16 @@
                 placeholder="Start typing writer's name"
             />
             <ComboboxOptions
-                className="absolute w-full h-40 z-10 overflow-y-auto text-sm bg-white border border-purple-300 py-2 my-1"
+                :class="{
+                    'absolute w-full h-40 z-10 overflow-y-auto text-sm bg-white border border-purple-300 py-2 my-1': filteredWriters.length > 0,
+                    'absolute w-full h-9 z-10 text-xs': filteredWriters.length === 0
+                }"                
             >
+                <Link v-if="filteredWriters.length === 0" :href="route('writers')">
+                    <i class="fas fa-times"></i> No writer found, create a new one?
+                </Link>
                 <ComboboxOption
+                    v-else
                     as="template"
                     v-slot="{ active, selected }"
                     v-for="writer in filteredWriters"
@@ -41,6 +48,7 @@
 
 <script>
 import { Combobox, ComboboxInput, ComboboxOptions, ComboboxOption } from '@headlessui/vue'
+import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
     name: 'SelectWriterComboBox',
@@ -48,7 +56,8 @@ export default {
         Combobox, 
         ComboboxInput, 
         ComboboxOptions, 
-        ComboboxOption
+        ComboboxOption,
+        Link
     },
     props: {
         writers: {

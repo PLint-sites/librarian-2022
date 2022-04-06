@@ -292,8 +292,6 @@ footer {
     }
 }
 
-
-
 .form-group {
         display: grid;
         grid-template-rows: 42px 42px;

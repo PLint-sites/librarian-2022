@@ -18,10 +18,6 @@
                     <label for="book_writer">Writer</label>
 
                     <SelectWriterComboBox :writers="writers" @writer-chosen="setWriterChosen"/>
-                    <!-- <select id="book_writer" v-model="form.writer_id" @focus="clearError('writer_id')">
-                        <option disabled value="">Select writer</option>
-                        <option v-for="writer in writers" :key="writer.id" :value="writer.id">{{ writer.name }}</option>
-                    </select> -->
                 </div>
                 <div v-if="form.errors.writer_id" class="mb-2 text-red-500">{{ form.errors.writer_id }}</div>
 

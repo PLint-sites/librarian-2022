@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <Combobox v-model="selectedWriter">
+    <div class="relative">
+        <Combobox v-model="selectedWriter" >
             <ComboboxInput 
                 className="w-full"
                 @change="query = $event.target.value" 
@@ -8,7 +8,7 @@
                 placeholder="Start typing writer's name"
             />
             <ComboboxOptions
-                className="fixed h-auto max-h-60 z-10 w-3/4 text-sm overflow-y-auto border border-purple-300 py-2 my-1"
+                className="absolute w-full h-40 z-10 overflow-y-auto text-sm bg-white border border-purple-300 py-2 my-1"
             >
                 <ComboboxOption
                     as="template"

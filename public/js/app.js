@@ -26061,7 +26061,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_SelectWriterComboBox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("SelectWriterComboBox");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    id: "writer-group",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["form-group", $data.className])
   }, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SelectWriterComboBox, {
     writers: $props.writers,
@@ -31919,7 +31918,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#writer-group.no-writers-found[data-v-75559316] {\n  margin-bottom: 48px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".form-group.no-writers-found[data-v-75559316] {\n  margin-bottom: 52px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

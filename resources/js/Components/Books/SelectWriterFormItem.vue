@@ -1,5 +1,5 @@
 <template>
-    <div id="writer-group" class="form-group" :class="className">
+    <div class="form-group" :class="className">
         <label for="book_writer">Writer</label>
 
         <SelectWriterComboBox 
@@ -17,7 +17,7 @@ import SelectWriterComboBox from './SelectWriterComboBox.vue'
 export default {
     name: 'SelectWriterFormItem',
     components: {
-        SelectWriterComboBox
+        SelectWriterComboBox,
     },
     props: {
         writers: {
@@ -49,9 +49,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-#writer-group {
-    &.no-writers-found {
-        margin-bottom: 48px;
-    }
+.form-group.no-writers-found {
+    margin-bottom: 52px;
 }
 </style>

@@ -20,7 +20,7 @@ Route::get('/', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-});
+})->middleware('guest');
 
 // Logged in
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {

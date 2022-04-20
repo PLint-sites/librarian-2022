@@ -14,12 +14,11 @@
                 <div v-if="form.errors.title" class="mb-2 text-red-500">{{ form.errors.title }}</div>
 
                 <!-- writer -->
-                <div class="form-group">
-                    <label for="book_writer">Writer</label>
-
-                    <SelectWriterComboBox :writers="writers" @writer-chosen="setWriterChosen"/>
-                </div>
-                <div v-if="form.errors.writer_id" class="mb-2 text-red-500">{{ form.errors.writer_id }}</div>
+                <SelectWriterFormItem 
+                    :writers="writers" 
+                    :error="form.errors.writer_id"
+                    @writer-chosen="setWriterChosen"
+                />
 
                 <!-- genre -->
                 <div class="form-group">
@@ -63,7 +62,7 @@
 import JetDialogModal from '@/Jetstream/DialogModal'
 import JetButton from '@/Jetstream/Button'
 import JetActionMessage from '@/Jetstream/ActionMessage'
-import SelectWriterComboBox from './SelectWriterComboBox.vue'
+import SelectWriterFormItem from './SelectWriterFormItem.vue'
 
 export default {
     name: 'AddBookModal',
@@ -71,7 +70,7 @@ export default {
         JetDialogModal,
         JetButton,
         JetActionMessage,
-        SelectWriterComboBox,
+        SelectWriterFormItem,
     },
     props: ['showAddBookModal', 'writers', 'genres'],
     data() {

@@ -10,12 +10,16 @@
             <ComboboxOptions
                 :class="{
                     'absolute w-full h-40 z-10 overflow-y-auto text-sm bg-white border border-purple-300 py-2 my-1': filteredWriters.length > 0,
-                    'absolute w-full h-9 z-10 text-xs': filteredWriters.length === 0
+                    'absolute top-14 w-full h-12 z-10 text-red-700': filteredWriters.length === 0
                 }"                
             >
-                <Link v-if="filteredWriters.length === 0" :href="route('writers')">
-                    <i class="fas fa-times"></i> No writer found, create a new one?
-                </Link>
+                <span v-if="filteredWriters.length === 0">
+                    No writer found for <b>{{ query }}</b>, let's create a new one
+                    <Link :href="route('writers')" class="px-2.5 py-1.5 bg-red-200 rounded-full ml-1">
+                        <i class="fas fa-plus"></i>
+                    </Link>
+                </span>
+                
                 <ComboboxOption
                     v-else
                     as="template"
@@ -81,6 +85,9 @@ export default {
     watch: {
         selectedWriter(chosenWriter) {
             this.$emit('writer-chosen', {id: chosenWriter.id})
+        },
+        filteredWriters(writerList) {
+            this.$emit('query-results-updated', {n: writerList.length})
         },
     },
 }

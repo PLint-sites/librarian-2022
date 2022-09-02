@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Http\Requests\SaveBookRequest;
 
 use App\Models\Book;
+use App\Models\Writer;
 
 use Redirect;
 use Auth;
@@ -28,7 +29,7 @@ class BooksController extends Controller
         $booksCount = $books->count();
         $books = $books->limit($this->perPage)->get();
 
-        $writers = \App\Models\Writer::latest()->get();
+        $writers = Writer::mywriters()->latest()->get();
         $genres = \App\Models\Genre::all();
         $perPage = $this->perPage;
 

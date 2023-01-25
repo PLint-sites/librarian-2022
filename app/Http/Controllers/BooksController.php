@@ -44,7 +44,7 @@ class BooksController extends Controller
      */
     public function draw($page, $search = null)
     {
-        $books = Book::with('genre', 'writer')->mybooks()->orderBy('created_at', 'desc');
+        $books = Book::with('genre', 'writer')->orderBy('created_at', 'desc');
 
         // search
         if (!is_null($search)) {
@@ -53,6 +53,10 @@ class BooksController extends Controller
                     $query->where('name', 'like', '%' . $search . '%');
                 });
         }
+
+        // keep only mybooks: if we do this before search, the query adds possible books
+        // from another user nonetheless
+        $books = $books->mybooks();
 
         $booksCount = $books->count();
 

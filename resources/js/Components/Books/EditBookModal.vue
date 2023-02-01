@@ -45,6 +45,14 @@
                     <input id="book_completed" type="checkbox" v-model="form.completed">
                 </div>
 
+                <!-- on loan -->
+                <div id="on-loan-container">
+                    <label for="book_on_loan">On loan to</label>
+                    <input id="book_on_loan" type="text" v-model="form.on_loan_to" placeholder="On loan to" @focus="clearError('on_loan_to')">
+                    <p v-if="form.on_loan_to && form.on_loan_to.length > 0" id="helptext" class="text-xs">Clear field when book is back</p>
+                </div>
+                <div v-if="form.errors.on_loan_to" class="mb-2 text-red-500">{{ form.errors.on_loan_to }}</div>
+
                 <!-- submit -->
                 <div>
                     <jet-button class="bg-purple-600 text-yellow-200" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -89,6 +97,7 @@ export default {
                 genre_id: this.book.genre_id,
                 owned: !!this.book.owned,
                 completed: !!this.book.completed,
+                on_loan_to: this.book.on_loan_to
             }),
         }
     },
@@ -166,6 +175,33 @@ export default {
         input {
             grid-column-start: 2;
             grid-column-end: 3;
+        }
+    }
+}
+
+#on-loan-container {
+    display: grid;
+    grid-template-rows: 42px 42px 42px;
+    grid-gap: 5px 0;
+    align-items: center;
+    margin-bottom: 5px;
+
+    #helptext {
+        align-self: start;
+    }
+}
+
+@media (min-width: 768px) {
+    #on-loan-container {
+        display: grid;
+        grid-gap: 5px 15px;
+        grid-template-rows: 42px 18px;
+        grid-template-columns: 100px 1fr;
+        align-items: center;
+        margin-bottom: 15px;
+
+        #helptext {
+            grid-column-start: 2;
         }
     }
 }

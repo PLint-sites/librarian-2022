@@ -9,7 +9,7 @@
             {{ book.genre.name }}
             <br>
             <span class="created">Added {{ book.start_reading_date}}</span>
-            <span v-if="book.on_loan_to" class="on_loan"><br>Uitgeleend aan <b>{{ book.on_loan_to }}</b></span>
+            <span v-if="book.on_loan_to" class="on_loan text-orange-500" ><br>On loan to <b>{{ book.on_loan_to }}</b></span>
         </div>
 
         <EditBookModal :show-edit-book-modal="showEditBookModal" :book="book" :writers="writers" :genres="genres" @modal-closed="showEditBookModal = false"/>

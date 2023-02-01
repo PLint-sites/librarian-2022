@@ -28,7 +28,8 @@ class SaveBookRequest extends FormRequest
             'owned' => 'required|min:0|max:1',
             'completed' => 'required|min:0|max:1',
             'genre_id' => 'required|min:1',
-            'writer_id' => 'required|min:1'
+            'writer_id' => 'required|min:1',
+            'on_loan_to' => 'sometimes|max:255',
         ];
     }
 }

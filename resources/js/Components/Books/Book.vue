@@ -1,5 +1,5 @@
 <template>
-    <div class="book" :class="bookOwnedCompletedClass" @click="showEditBookModal = true">
+    <div class="book" :class="bookColorClass" @click="showEditBookModal = true">
         <div class="title">
             <h3>{{ book.title }}</h3>
         </div>
@@ -9,6 +9,7 @@
             {{ book.genre.name }}
             <br>
             <span class="created">Added {{ book.start_reading_date}}</span>
+            <span v-if="book.on_loan_to" class="on_loan"><br>Uitgeleend aan <b>{{ book.on_loan_to }}</b></span>
         </div>
 
         <EditBookModal :show-edit-book-modal="showEditBookModal" :book="book" :writers="writers" :genres="genres" @modal-closed="showEditBookModal = false"/>
@@ -30,9 +31,13 @@ export default {
         }
     },
     computed: {
-        bookOwnedCompletedClass() {
-            // let bookClass
-            return `${this.book.owned ? 'owned' : ''} ${this.book.completed ? 'completed' : ''}`
+        bookColorClass() {
+            // based on on_loan_to, owned and completed
+            if (this.book.on_loan_to) {
+                return 'on-loan'
+            } else {
+                return `${this.book.owned ? 'owned' : ''} ${this.book.completed ? 'completed' : ''}`
+            }
         },
     },
 }
@@ -51,6 +56,11 @@ export default {
     padding: 10px 15px;
     border-radius: 4px;
     box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+
+    &.on-loan {
+        background: blue;
+        color: white;
+    }
 
     &.owned {
         background: @green;

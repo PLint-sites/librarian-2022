@@ -53,6 +53,12 @@
                 </div>
                 <div v-if="form.errors.on_loan_to" class="mb-2 text-red-500">{{ form.errors.on_loan_to }}</div>
 
+                <!-- On bookshelf -->
+                <div class="form-group book-checkbox">
+                    <label for="on_bookshelf">On bookshelf</label>
+                    <input id="on_bookshelf" type="checkbox" v-model="form.is_on_bookshelf">
+                </div>
+
                 <!-- submit -->
                 <div>
                     <jet-button class="bg-purple-600 text-yellow-200" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -97,6 +103,7 @@ export default {
                 genre_id: this.book.genre_id,
                 owned: !!this.book.owned,
                 completed: !!this.book.completed,
+                is_on_bookshelf: !!this.book.is_on_bookshelf,
                 on_loan_to: this.book.on_loan_to
             }),
         }

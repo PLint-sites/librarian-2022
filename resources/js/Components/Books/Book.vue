@@ -1,5 +1,6 @@
 <template>
     <div class="book" :class="bookColorClass" @click="showEditBookModal = true">
+        <i v-if="book.is_on_bookshelf" class="fas fa-star text-purple-700"></i>
         <div class="title">
             <h3>{{ book.title }}</h3>
         </div>
@@ -90,6 +91,12 @@ export default {
         .created {
             color: #616161;
         }
+    }
+
+    .fas.fa-star {
+        position: absolute;
+        right: 5px;
+        top: 7px;
     }
 }
 </style>

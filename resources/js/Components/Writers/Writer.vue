@@ -4,7 +4,10 @@
             <div class="writer-and-books">
                 <h3>{{ writer.name }} ({{ booksCount }})</h3>
                 <ul v-if="booksCount > 0">
-                    <li v-for="book in writer.books" :key="book.id">{{ book.title }}</li>
+                    <li v-for="book in writer.books" :key="book.id">
+                        {{ book.title }}
+                        <i v-if="book.is_on_bookshelf" class="fas fa-book-open"></i>
+                    </li>
                 </ul>
             </div>
 

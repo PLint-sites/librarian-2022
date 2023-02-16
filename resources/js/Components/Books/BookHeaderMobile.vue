@@ -8,6 +8,10 @@
             <button class="icon-button" type="button" @click="showModal">
                 <i class="fas fa-plus"></i>
             </button>
+
+            <button class="icon-button" type="button" @click="showBookShelf">
+                <i class="fas fa-book-open"></i>
+            </button>
             
             <button class="icon-button" type="button" @click="showSearch">
                 <i class="fas fa-search"></i>
@@ -59,6 +63,9 @@ export default {
         showModal() {
             this.$emit('show-modal')
         },
+        showBookShelf() {
+            this.$emit('show-bookshelf')
+        },
     },
 }
 </script>
@@ -71,7 +78,7 @@ export default {
 }
 
 #page-title {
-    grid-template-columns: auto 72px;
+    grid-template-columns: auto 112px;
 
     #search-field {
         width: 100%;

@@ -8,6 +8,10 @@
             <button class="icon-button" type="button" @click="showModal">
                 <i class="fas fa-plus"></i>
             </button>
+
+            <button class="icon-button" type="button" @click="showBookShelf">
+                <i class="fas fa-book-open"></i>
+            </button>
             
             <input type="text" placeholder="Search book..." @keyup="debounceSearch" v-model="search">
             <button class="icon-button" type="button" @click="resetSearch">
@@ -45,6 +49,9 @@ export default {
         showModal() {
             this.$emit('show-modal')
         },
+        showBookShelf() {
+            this.$emit('show-bookshelf')
+        },
     },
 }
 </script>
@@ -53,7 +60,7 @@ export default {
 @purple: #7b1fa2;
 
 #page-title {
-    grid-template-columns: auto 300px;
+    grid-template-columns: auto 320px;
 
     .button-and-search {
         position: relative;

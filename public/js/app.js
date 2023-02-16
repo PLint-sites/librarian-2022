@@ -21700,6 +21700,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     showModal: function showModal() {
       this.$emit('show-modal');
+    },
+    showBookShelf: function showBookShelf() {
+      this.$emit('show-bookshelf');
     }
   }
 });
@@ -21756,6 +21759,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     showModal: function showModal() {
       this.$emit('show-modal');
+    },
+    showBookShelf: function showBookShelf() {
+      this.$emit('show-bookshelf');
     }
   }
 });
@@ -23973,7 +23979,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$nextTick(function () {
         _this3.masonry.layout();
       });
-    }
+    },
+    showBookshelf: function showBookshelf() {}
   },
   watch: {
     books: function books(list) {
@@ -25249,7 +25256,7 @@ var _withScopeId = function _withScopeId(n) {
 
 var _hoisted_1 = {
   key: 0,
-  "class": "fas fa-star text-purple-700"
+  "class": "fas fa-book-open text-purple-700"
 };
 var _hoisted_2 = {
   "class": "title"
@@ -25363,13 +25370,23 @@ var _hoisted_5 = [_hoisted_4];
 
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "fas fa-times-circle"
+    "class": "fas fa-book-open"
   }, null, -1
   /* HOISTED */
   );
 });
 
 var _hoisted_7 = [_hoisted_6];
+
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fas fa-times-circle"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_9 = [_hoisted_8];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, " Your books (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.booksCount) + ") ", 1
   /* TEXT */
@@ -25379,13 +25396,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.showModal && $options.showModal.apply($options, arguments);
     })
-  }, _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "icon-button",
+    type: "button",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.showBookShelf && $options.showBookShelf.apply($options, arguments);
+    })
+  }, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     placeholder: "Search book...",
-    onKeyup: _cache[1] || (_cache[1] = function () {
+    onKeyup: _cache[2] || (_cache[2] = function () {
       return $options.debounceSearch && $options.debounceSearch.apply($options, arguments);
     }),
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.search = $event;
     })
   }, null, 544
@@ -25393,10 +25416,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "icon-button",
     type: "button",
-    onClick: _cache[3] || (_cache[3] = function () {
+    onClick: _cache[4] || (_cache[4] = function () {
       return $options.resetSearch && $options.resetSearch.apply($options, arguments);
     })
-  }, _hoisted_7)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  }, _hoisted_9)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -25443,18 +25466,28 @@ var _hoisted_5 = [_hoisted_4];
 
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "fas fa-search"
+    "class": "fas fa-book-open"
   }, null, -1
   /* HOISTED */
   );
 });
 
 var _hoisted_7 = [_hoisted_6];
-var _hoisted_8 = {
+
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": "fas fa-search"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_9 = [_hoisted_8];
+var _hoisted_10 = {
   id: "search-field"
 };
 
-var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-times-circle"
   }, null, -1
@@ -25462,7 +25495,7 @@ var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_10 = [_hoisted_9];
+var _hoisted_12 = [_hoisted_11];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, " Your books (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.booksCount) + ") ", 1
   /* TEXT */
@@ -25476,16 +25509,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "icon-button",
     type: "button",
     onClick: _cache[1] || (_cache[1] = function () {
+      return $options.showBookShelf && $options.showBookShelf.apply($options, arguments);
+    })
+  }, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "icon-button",
+    type: "button",
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.showSearch && $options.showSearch.apply($options, arguments);
     })
-  }, _hoisted_7)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, _hoisted_9)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     ref: "searchInput",
     placeholder: "Search book/writer...",
-    onKeyup: _cache[2] || (_cache[2] = function () {
+    onKeyup: _cache[3] || (_cache[3] = function () {
       return $options.debounceSearch && $options.debounceSearch.apply($options, arguments);
     }),
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.search = $event;
     })
   }, null, 544
@@ -25493,10 +25532,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "icon-button",
     type: "button",
-    onClick: _cache[4] || (_cache[4] = function () {
+    onClick: _cache[5] || (_cache[5] = function () {
       return $options.resetSearch && $options.resetSearch.apply($options, arguments);
     })
-  }, _hoisted_10)], 512
+  }, _hoisted_12)], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showSearchInput]])]);
 }
@@ -26640,10 +26679,14 @@ var _hoisted_4 = {
   key: 0
 };
 var _hoisted_5 = {
+  key: 0,
+  "class": "fas fa-book-open"
+};
+var _hoisted_6 = {
   "class": "buttons"
 };
 
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-trash"
   }, null, -1
@@ -26651,9 +26694,9 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_7 = [_hoisted_6];
+var _hoisted_8 = [_hoisted_7];
 
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-pencil-alt"
   }, null, -1
@@ -26661,7 +26704,7 @@ var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_9 = [_hoisted_8];
+var _hoisted_10 = [_hoisted_9];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_EditWriterModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EditWriterModal");
 
@@ -26672,12 +26715,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), $options.booksCount > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.writer.books, function (book) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       key: book.id
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.title), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(book.title) + " ", 1
     /* TEXT */
-    );
+    ), book.is_on_bookshelf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$props.writer.books.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$props.writer.books.length === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     "class": "icon-button",
     type: "button",
@@ -26687,13 +26730,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     style: {
       "margin-right": "8px"
     }
-  }, _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, _hoisted_8)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "icon-button",
     type: "button",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $data.showEditWriterModal = true;
     })
-  }, _hoisted_9)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditWriterModal, {
+  }, _hoisted_10)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditWriterModal, {
     "show-edit-writer-modal": $data.showEditWriterModal,
     writer: $props.writer,
     onModalClosed: _cache[2] || (_cache[2] = function ($event) {
@@ -30049,10 +30092,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onResetFilter: $options.resetFilter,
         onShowModal: _cache[0] || (_cache[0] = function ($event) {
           return $data.showAddBookModal = true;
-        })
+        }),
+        onShowBookshelf: $options.showBookshelf
       }, null, 8
       /* PROPS */
-      , ["booksCount", "has-books", "onFilterBooks", "onResetFilter"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BookHeaderDesktop, {
+      , ["booksCount", "has-books", "onFilterBooks", "onResetFilter", "onShowBookshelf"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_BookHeaderDesktop, {
         key: 1,
         booksCount: $data.numberOfBooks,
         "has-books": $options.userHasBooks,
@@ -30060,10 +30104,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onResetFilter: $options.resetFilter,
         onShowModal: _cache[1] || (_cache[1] = function ($event) {
           return $data.showAddBookModal = true;
-        })
+        }),
+        onShowBookshelf: $options.showBookshelf
       }, null, 8
       /* PROPS */
-      , ["booksCount", "has-books", "onFilterBooks", "onResetFilter"]))];
+      , ["booksCount", "has-books", "onFilterBooks", "onResetFilter", "onShowBookshelf"]))];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$data.isSearching && !$data.hasSearchResults ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_NoSearchResult, {
@@ -31854,7 +31899,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".book[data-v-2c5ca64e] {\n  position: absolute;\n  opacity: 0.6;\n  box-sizing: border-box;\n  background: #ff9800;\n  color: rgba(0, 0, 0, 0.54);\n  padding: 10px 15px;\n  border-radius: 4px;\n  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n.book.on-loan[data-v-2c5ca64e] {\n  background: blue;\n  color: white;\n}\n.book.owned[data-v-2c5ca64e] {\n  background: #4caf50;\n}\n.book.completed[data-v-2c5ca64e] {\n  opacity: 1;\n}\n.book .title[data-v-2c5ca64e] {\n  display: grid;\n  grid-template-columns: auto 32px 32px;\n  grid-column-gap: 8px;\n  font-size: 0.875rem;\n  line-height: 1.375rem;\n}\n.book .title h3[data-v-2c5ca64e] {\n  align-self: center;\n  text-transform: uppercase;\n}\n.book .info[data-v-2c5ca64e] {\n  font-size: 0.8rem;\n  line-height: 1.15rem;\n}\n.book .info .created[data-v-2c5ca64e] {\n  color: #616161;\n}\n.book .fas.fa-star[data-v-2c5ca64e] {\n  position: absolute;\n  right: 5px;\n  top: 7px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".book[data-v-2c5ca64e] {\n  position: absolute;\n  opacity: 0.6;\n  box-sizing: border-box;\n  background: #ff9800;\n  color: rgba(0, 0, 0, 0.54);\n  padding: 10px 15px;\n  border-radius: 4px;\n  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\n.book.on-loan[data-v-2c5ca64e] {\n  background: blue;\n  color: white;\n}\n.book.owned[data-v-2c5ca64e] {\n  background: #4caf50;\n}\n.book.completed[data-v-2c5ca64e] {\n  opacity: 1;\n}\n.book .title[data-v-2c5ca64e] {\n  display: grid;\n  grid-template-columns: auto 32px 32px;\n  grid-column-gap: 8px;\n  font-size: 0.875rem;\n  line-height: 1.375rem;\n}\n.book .title h3[data-v-2c5ca64e] {\n  align-self: center;\n  text-transform: uppercase;\n}\n.book .info[data-v-2c5ca64e] {\n  font-size: 0.8rem;\n  line-height: 1.15rem;\n}\n.book .info .created[data-v-2c5ca64e] {\n  color: #616161;\n}\n.book .fas.fa-book-open[data-v-2c5ca64e] {\n  position: absolute;\n  right: 5px;\n  top: 7px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31878,7 +31923,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#page-title[data-v-50342726] {\n  grid-template-columns: auto 300px;\n}\n#page-title .button-and-search[data-v-50342726] {\n  position: relative;\n}\n#page-title .button-and-search input[type=\"text\"] ~ button[data-v-50342726] {\n  position: absolute;\n  right: 9px;\n  top: 9px;\n  box-shadow: none;\n  background: none;\n  border: none;\n  width: 23px;\n  height: 23px;\n}\n#page-title .button-and-search input[type=\"text\"] ~ button i[data-v-50342726] {\n  color: #7b1fa2;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#page-title[data-v-50342726] {\n  grid-template-columns: auto 320px;\n}\n#page-title .button-and-search[data-v-50342726] {\n  position: relative;\n}\n#page-title .button-and-search input[type=\"text\"] ~ button[data-v-50342726] {\n  position: absolute;\n  right: 9px;\n  top: 9px;\n  box-shadow: none;\n  background: none;\n  border: none;\n  width: 23px;\n  height: 23px;\n}\n#page-title .button-and-search input[type=\"text\"] ~ button i[data-v-50342726] {\n  color: #7b1fa2;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31902,7 +31947,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".icon-button i.fas[data-v-cb288cf0] {\n  pointer-events: none;\n}\n#page-title[data-v-cb288cf0] {\n  grid-template-columns: auto 72px;\n}\n#page-title #search-field[data-v-cb288cf0] {\n  width: 100%;\n  margin-top: 15px;\n  grid-column-start: span 2;\n  justify-self: start;\n  position: relative;\n}\n#page-title #search-field input[data-v-cb288cf0] {\n  width: 100%;\n}\n#page-title #search-field button[data-v-cb288cf0] {\n  position: absolute;\n  right: 9px;\n  top: 9px;\n  box-shadow: none;\n  background: none;\n  border: none;\n  width: 23px;\n  height: 23px;\n}\n#page-title #search-field button i[data-v-cb288cf0] {\n  color: #7b1fa2;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".icon-button i.fas[data-v-cb288cf0] {\n  pointer-events: none;\n}\n#page-title[data-v-cb288cf0] {\n  grid-template-columns: auto 112px;\n}\n#page-title #search-field[data-v-cb288cf0] {\n  width: 100%;\n  margin-top: 15px;\n  grid-column-start: span 2;\n  justify-self: start;\n  position: relative;\n}\n#page-title #search-field input[data-v-cb288cf0] {\n  width: 100%;\n}\n#page-title #search-field button[data-v-cb288cf0] {\n  position: absolute;\n  right: 9px;\n  top: 9px;\n  box-shadow: none;\n  background: none;\n  border: none;\n  width: 23px;\n  height: 23px;\n}\n#page-title #search-field button i[data-v-cb288cf0] {\n  color: #7b1fa2;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->tinyInteger('is_on_bookshelf')->unsigned()->default(0)->after('is_on_loan');
+            $table->tinyInteger('is_on_bookshelf')->unsigned()->default(0)->after('on_loan_to');
         });
     }
 

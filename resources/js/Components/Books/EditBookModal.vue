@@ -33,6 +33,16 @@
                 </div>
                 <div v-if="form.errors.genre_id" class="mb-2 text-red-500">{{ form.errors.genre_id }}</div>
 
+                <!-- start/finish checkbox -->
+                <div v-if="book.start_reading === null" class="form-group book-checkbox">
+                    <label for="book_start_finish">Start reading</label>
+                    <input id="book_start_finish" type="checkbox" v-model="form.start_reading">
+                </div>
+                <div v-else class="form-group book-checkbox">
+                    <label for="book_start_finish">Finished</label>
+                    <input id="book_start_finish" type="checkbox" v-model="form.finish_reading">
+                </div>
+
                 <!-- owned -->
                 <div class="form-group book-checkbox">
                     <label for="book_owned">Owned</label>
@@ -101,6 +111,8 @@ export default {
                 title: this.book.title,
                 writer_id: this.book.writer_id,
                 genre_id: this.book.genre_id,
+                start_reading: this.book.start_reading,
+                finish_reading: this.book.finish_reading,
                 owned: !!this.book.owned,
                 completed: !!this.book.completed,
                 is_on_bookshelf: !!this.book.is_on_bookshelf,

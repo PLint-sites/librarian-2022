@@ -101,6 +101,16 @@ class BooksController extends Controller
      */
     public function update(SaveBookRequest $request, Book $book)
     {
+        // if start checkbox selected, set time started
+        if ($request->start_reading) {
+            $request->merge(['start_reading' => Carbon::now()]);
+        }
+
+        // if finish checkbox selected, set time finished and pull from bookshelf
+        if ($request->finish_reading) {
+            $request->merge(['finish_reading' => Carbon::now(), 'is_on_bookshelf' => 0]);
+        }
+
         $book->update($request->all());
 
         return Redirect::route('books');

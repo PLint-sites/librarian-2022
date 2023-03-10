@@ -20,6 +20,11 @@ class Book extends Model
 
     protected $appends = ['start_reading_date'];
 
+    protected $casts = [
+        'start_reading' => 'datetime:Y-m-d',
+        'finish_reading' => 'datetime:Y-m-d',
+    ];
+
     /**
      * Get the user that owns the book.
      */
@@ -62,6 +67,9 @@ class Book extends Model
      */
     public function getStartReadingDateAttribute()
     {
-        return $this->created_at->diffForHumans();
+        if (!is_null($this->start_reading)) {
+            return $this->start_reading->diffForHumans();
+        }
+        return null;
     }
 }

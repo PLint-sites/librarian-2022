@@ -12,6 +12,7 @@ use App\Models\Writer;
 
 use Redirect;
 use Auth;
+use Carbon\Carbon;
 
 class BooksController extends Controller
 {
@@ -74,6 +75,19 @@ class BooksController extends Controller
     public function store(SaveBookRequest $request)
     {
         $request->merge(['user_id' => Auth::ID()]);
+
+        // Start reading checked => set date, otherwise, put it on the bookshelf
+        if ($request->start_reading) {
+            $request->merge(['start_reading' => Carbon::now()]);
+        } else {
+            $request->merge(['start_reading' => null, 'is_on_bookshelf' => 1]);
+        }
+
+        // Completed checked => set date start/finish both to now
+        if ($request->completed) {
+            $request->merge(['start_reading' => Carbon::now(), 'finish_reading' => Carbon::now(), 'is_on_bookshelf' => 0]);
+        }
+
         Book::create($request->all());
 
         return Redirect::route('books');

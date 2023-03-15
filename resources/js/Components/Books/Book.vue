@@ -10,7 +10,7 @@
             {{ book.genre.name }}
             <br>
             
-            <span v-if="book.start_reading_date" class="created">Added {{ book.start_reading_date }}</span>
+            <span v-if="book.start_reading_date" class="created">Started {{ book.start_reading_date }}</span>
             
             <span v-if="book.on_loan_to" class="on_loan text-orange-500" ><br>On loan to <b>{{ book.on_loan_to }}</b></span>
         </div>

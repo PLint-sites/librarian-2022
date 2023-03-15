@@ -61,6 +61,17 @@ class Book extends Model
     }
 
     /**
+     * Scope: only include books from authenticated user that are on the bookshelf
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBookshelf($query)
+    {
+        return $query->where(['user_id' => \Auth::id(), 'is_on_bookshelf' => 1]);
+    }
+
+    /**
      * Get the date you started reading for humans
      *
      * @return string
@@ -72,4 +83,5 @@ class Book extends Model
         }
         return null;
     }
+
 }

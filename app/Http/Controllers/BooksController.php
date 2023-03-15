@@ -66,6 +66,13 @@ class BooksController extends Controller
         return compact('books', 'booksCount');
     }
 
+    public function bookshelf()
+    {
+        $books = Book::with('genre', 'writer')->bookshelf()->orderBy('created_at', 'desc')->get();
+
+        return Inertia::render('Bookshelf', compact('books'));
+    }
+
     /**
      * Store a new book in the database
      *

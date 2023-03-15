@@ -9,9 +9,7 @@
                 <i class="fas fa-plus"></i>
             </button>
 
-            <button class="icon-button" type="button" @click="showBookShelf">
-                <i class="fas fa-book-open"></i>
-            </button>
+            <Link class="icon-button" href="/bookshelf" as="button"><i class="fas fa-book-open"></i></Link>
             
             <input type="text" placeholder="Search book..." @keyup="debounceSearch" v-model="search">
             <button class="icon-button" type="button" @click="resetSearch">
@@ -22,8 +20,13 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue3'
+
 export default {
     name: 'BookHeaderDesktop',
+    components: {
+        Link,
+    },
     props: ['booksCount', 'hasBooks'],
     data() {
         return {
@@ -48,9 +51,6 @@ export default {
         },
         showModal() {
             this.$emit('show-modal')
-        },
-        showBookShelf() {
-            this.$emit('show-bookshelf')
         },
     },
 }

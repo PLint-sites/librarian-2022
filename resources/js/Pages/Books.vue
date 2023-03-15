@@ -8,7 +8,6 @@
                 @filter-books="filterBooks" 
                 @reset-filter="resetFilter"
                 @show-modal="showAddBookModal = true"
-                @show-bookshelf="showBookshelf"
             />
             <BookHeaderDesktop 
                 v-else 
@@ -17,7 +16,6 @@
                 @filter-books="filterBooks" 
                 @reset-filter="resetFilter"
                 @show-modal="showAddBookModal = true"
-                @show-bookshelf="showBookshelf"
             />
         </template>
 
@@ -139,9 +137,6 @@ export default {
             this.$nextTick(() => {
                 this.masonry.layout()
             })
-        },
-        showBookshelf() {
-            
         },
     },
     watch: {

@@ -21,6 +21,9 @@
                                 <jet-nav-link :href="route('writers')" :active="route().current('writers')">
                                     <i class="fas fa-pencil-alt"></i> Writers
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('bookshelf')" :active="route().current('bookshelf')">
+                                    <i class="fas fa-book-open"></i> Bookshelf
+                                </jet-nav-link>
                             </div>
                         </div>
 
@@ -80,6 +83,10 @@
 
                         <jet-responsive-nav-link :href="route('writers')" :active="route().current('writers')">
                             <i class="fas fa-pencil-alt"></i> Writers
+                        </jet-responsive-nav-link>
+
+                        <jet-responsive-nav-link :href="route('bookshelf')" :active="route().current('bookshelf')">
+                            <i class="fas fa-book-open"></i> Bookshelf
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">

@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     // Books
     Route::get('books', [App\Http\Controllers\BooksController::class, 'index'])->name('books');
     Route::get('books/draw/{page}/{search?}', [App\Http\Controllers\BooksController::class, 'draw'])->name('more-books');
+    Route::get('bookshelf', [App\Http\Controllers\BooksController::class, 'bookshelf'])->name('bookshelf');
 
     Route::post('book', [App\Http\Controllers\BooksController::class, 'store']);
     Route::patch('book/{book}', [App\Http\Controllers\BooksController::class, 'update']);

@@ -9,9 +9,7 @@
                 <i class="fas fa-plus"></i>
             </button>
 
-            <button class="icon-button" type="button" @click="showBookShelf">
-                <i class="fas fa-book-open"></i>
-            </button>
+            <Link class="icon-button" href="/bookshelf" as="button"><i class="fas fa-book-open"></i></Link>
             
             <button class="icon-button" type="button" @click="showSearch">
                 <i class="fas fa-search"></i>
@@ -28,8 +26,13 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue3'
+
 export default {
     name: 'BookHeaderMobile',
+    components: {
+        Link,
+    },
     props: ['booksCount', 'hasBooks'],
     data() {
         return {
@@ -62,9 +65,6 @@ export default {
         },
         showModal() {
             this.$emit('show-modal')
-        },
-        showBookShelf() {
-            this.$emit('show-bookshelf')
         },
     },
 }

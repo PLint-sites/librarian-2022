@@ -24062,6 +24062,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Books_Book__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Books/Book */ "./resources/js/Components/Books/Book.vue");
 /* harmony import */ var _Components_Books_BookHeaderMobile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Books/BookHeaderMobile */ "./resources/js/Components/Books/BookHeaderMobile.vue");
 /* harmony import */ var _Components_Books_BookHeaderDesktop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/Books/BookHeaderDesktop */ "./resources/js/Components/Books/BookHeaderDesktop.vue");
+/* harmony import */ var minimasonry__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! minimasonry */ "./node_modules/minimasonry/build/minimasonry.esm.js");
+
 
 
 
@@ -24073,7 +24075,38 @@ __webpack_require__.r(__webpack_exports__);
     BookHeaderMobile: _Components_Books_BookHeaderMobile__WEBPACK_IMPORTED_MODULE_2__["default"],
     BookHeaderDesktop: _Components_Books_BookHeaderDesktop__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  props: ['books']
+  props: ['books', 'writers', 'genres'],
+  data: function data() {
+    return {
+      smartphoneSize: null,
+      desktopSize: null,
+      masonry: null
+    };
+  },
+  methods: {
+    initMasonry: function initMasonry() {
+      this.masonry = new minimasonry__WEBPACK_IMPORTED_MODULE_4__["default"]({
+        container: '#booklist',
+        baseWidth: 150,
+        minify: false,
+        gutter: this.smartphoneSize ? 5 : 20,
+        wedge: true
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.initMasonry(); // MatchMedia 
+
+    var mediaQuery = window.matchMedia('(max-width: 767px)'); // Check if the media query is true
+
+    if (mediaQuery.matches) {
+      this.smartphoneSize = true;
+      this.desktopSize = false;
+    } else {
+      this.smartphoneSize = false;
+      this.desktopSize = true;
+    }
+  }
 });
 
 /***/ }),
@@ -30334,8 +30367,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Book, {
           key: book.id,
           book: book,
-          writers: _ctx.writers,
-          genres: _ctx.genres
+          writers: $props.writers,
+          genres: $props.genres
         }, null, 8
         /* PROPS */
         , ["book", "writers", "genres"]);

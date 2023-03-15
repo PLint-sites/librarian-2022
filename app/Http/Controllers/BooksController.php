@@ -69,8 +69,10 @@ class BooksController extends Controller
     public function bookshelf()
     {
         $books = Book::with('genre', 'writer')->bookshelf()->orderBy('created_at', 'desc')->get();
+        $writers = Writer::mywriters()->latest()->get();
+        $genres = \App\Models\Genre::all();
 
-        return Inertia::render('Bookshelf', compact('books'));
+        return Inertia::render('Bookshelf', compact('books', 'writers', 'genres'));
     }
 
     /**

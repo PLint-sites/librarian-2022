@@ -35,12 +35,12 @@
 
                 <!-- start/finish checkbox -->
                 <div v-if="book.start_reading === null" class="form-group book-checkbox">
-                    <label for="book_start_finish">Start reading</label>
-                    <input id="book_start_finish" type="checkbox" v-model="form.start_reading">
+                    <label for="book_start">Start reading</label>
+                    <input id="book_start" type="checkbox" v-model="form.start_reading">
                 </div>
                 <div v-else class="form-group book-checkbox">
-                    <label for="book_start_finish">Finished</label>
-                    <input id="book_start_finish" type="checkbox" v-model="form.finish_reading">
+                    <label for="book_finish">Finished</label>
+                    <input id="book_finish" type="checkbox" v-model="form.finish_reading">
                 </div>
 
                 <!-- owned -->
@@ -50,7 +50,7 @@
                 </div>
                 
                 <!-- completed -->
-                <div class="form-group book-checkbox">
+                <div v-if="book.start_reading === null" class="form-group book-checkbox">
                     <label for="book_completed">Completed</label>
                     <input id="book_completed" type="checkbox" v-model="form.completed">
                 </div>

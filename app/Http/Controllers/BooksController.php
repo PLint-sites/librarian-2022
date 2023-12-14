@@ -26,7 +26,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::with('genre', 'writer')->mybooks()->orderBy('created_at', 'desc');
+        $books = Book::with('genre', 'writer')->mybooks()->orderBy('start_reading', 'desc');
         $booksCount = $books->count();
         $books = $books->limit($this->perPage)->get();
 
@@ -45,7 +45,7 @@ class BooksController extends Controller
      */
     public function draw($page, $search = null)
     {
-        $books = Book::with('genre', 'writer')->orderBy('created_at', 'desc');
+        $books = Book::with('genre', 'writer')->orderBy('start_reading', 'desc');
 
         // search
         if (!is_null($search)) {
@@ -111,13 +111,13 @@ class BooksController extends Controller
     public function update(SaveBookRequest $request, Book $book)
     {
         // if start checkbox selected, set time started
-        if ($request->start_reading) {
+        if ($request->has('start_reading') && $request->start_reading === true) {
             $request->merge(['start_reading' => Carbon::now()]);
         }
 
-        // if finish checkbox selected, set time finished and pull from bookshelf
+        // if finish checkbox selected, set time finished, pull from bookshelf and mark as completed
         if ($request->finish_reading) {
-            $request->merge(['finish_reading' => Carbon::now(), 'is_on_bookshelf' => 0]);
+            $request->merge(['finish_reading' => Carbon::now(), 'is_on_bookshelf' => 0, 'completed' => 1]);
         }
 
         $book->update($request->all());

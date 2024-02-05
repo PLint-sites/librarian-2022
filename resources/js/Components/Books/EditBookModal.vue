@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/vue3'
 import JetDialogModal from '@/Jetstream/DialogModal'
 import JetButton from '@/Jetstream/Button'
 import JetActionMessage from '@/Jetstream/ActionMessage'

@@ -6,9 +6,9 @@
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <div class="flex-shrink-0 flex items-center">
-                                <inertia-link id="brand" href="#">
+                                <Link id="brand" href="#">
                                     Librarian
-                                </inertia-link>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -23,8 +23,9 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/vue3';
 export default {
-
+    components: {Link}
 }
 </script>
 

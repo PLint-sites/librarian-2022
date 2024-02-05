@@ -30,7 +30,7 @@
 <script>
     import { defineComponent } from 'vue'
     import AuthLayout from '@/Layouts/AuthLayout.vue'
-    import { Head } from '@inertiajs/inertia-vue3';
+    import { Head } from '@inertiajs/vue3';
     import JetButton from '@/Jetstream/Button.vue'
     import JetInput from '@/Jetstream/Input.vue'
     import JetLabel from '@/Jetstream/Label.vue'

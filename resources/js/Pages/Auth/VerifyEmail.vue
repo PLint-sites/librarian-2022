@@ -26,7 +26,7 @@
     import { defineComponent } from 'vue'
     import AuthLayout from '@/Layouts/AuthLayout.vue'
     import JetButton from '@/Jetstream/Button.vue'
-    import { Head, Link } from '@inertiajs/inertia-vue3';
+    import { Head, Link } from '@inertiajs/vue3';
 
     export default defineComponent({
         components: {

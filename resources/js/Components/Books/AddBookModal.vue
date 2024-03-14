@@ -37,7 +37,7 @@
                 </div>
 
                 <!-- owned -->
-                <div class="form-group  book-checkbox">
+                <div class="form-group book-checkbox">
                     <label for="book_owned">Owned</label>
                     <input id="book_owned" type="checkbox" v-model="form.owned">
                 </div>
@@ -47,6 +47,13 @@
                     <label for="book_completed">Completed</label>
                     <input id="book_completed" type="checkbox" v-model="form.completed">
                 </div>
+
+                <!-- comment -->
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea id="comment" v-model="form.comment" placeholder="Comment" @focus="clearError('comment')"></textarea>
+                </div>
+                <div v-if="form.errors.comment" class="mb-2 text-red-500">{{ form.errors.comment }}</div>
                 
                 <!-- submit -->
                 <div>
@@ -84,6 +91,7 @@ export default {
             show: this.showAddBookModal,
             form: this.$inertia.form({
                 title: null,
+                comment: null,
                 writer_id: null,
                 genre_id: null,
                 start_reading: true,

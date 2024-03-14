@@ -69,6 +69,13 @@
                     <input id="on_bookshelf" type="checkbox" v-model="form.is_on_bookshelf">
                 </div>
 
+                <!-- comment -->
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea id="comment" v-model="form.comment" placeholder="Comment" @focus="clearError('comment')"></textarea>
+                </div>
+                <div v-if="form.errors.comment" class="mb-2 text-red-500">{{ form.errors.comment }}</div>
+                
                 <!-- submit -->
                 <div>
                     <jet-button class="bg-purple-600 text-yellow-200" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -109,6 +116,7 @@ export default {
             show: this.showEditBookModal,
             form: this.$inertia.form({
                 title: this.book.title,
+                comment: this.book.comment,
                 writer_id: this.book.writer_id,
                 genre_id: this.book.genre_id,
                 start_reading: this.book.start_reading,

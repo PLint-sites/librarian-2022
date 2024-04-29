@@ -59,7 +59,7 @@
                 <div id="on-loan-container">
                     <label for="book_on_loan">On loan to</label>
                     <input id="book_on_loan" type="text" v-model="form.on_loan_to" placeholder="On loan to" @focus="clearError('on_loan_to')">
-                    <p v-if="form.on_loan_to && form.on_loan_to.length > 0" id="helptext" class="text-xs">Clear field when book is back</p>
+                    <p id="helptext" class="text-xs">Clear field when book is back</p>
                 </div>
                 <div v-if="form.errors.on_loan_to" class="mb-2 text-red-500">{{ form.errors.on_loan_to }}</div>
 
@@ -70,14 +70,14 @@
                 </div>
 
                 <!-- comment -->
-                <div class="form-group">
+                <div class="form-group form-group-ta">
                     <label for="comment">Comment</label>
                     <textarea id="comment" v-model="form.comment" placeholder="Comment" @focus="clearError('comment')"></textarea>
                 </div>
                 <div v-if="form.errors.comment" class="mb-2 text-red-500">{{ form.errors.comment }}</div>
                 
                 <!-- submit -->
-                <div>
+                <div class="mt-4">
                     <jet-button class="bg-purple-600 text-yellow-200" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         <i class="fas fa-book mr-2"></i> Update
                     </jet-button>
@@ -218,6 +218,15 @@ export default {
     }
 }
 
+.form-group-ta {
+    grid-template-rows: 42px 84px;
+    height: auto;
+
+    textarea {
+        height: 84px;
+    }
+}
+
 @media (min-width: 768px) {
     #on-loan-container {
         display: grid;
@@ -230,6 +239,10 @@ export default {
         #helptext {
             grid-column-start: 2;
         }
+    }
+
+    .form-group-ta {
+        grid-template-rows: 1fr;
     }
 }
 </style>

@@ -49,14 +49,14 @@
                 </div>
 
                 <!-- comment -->
-                <div class="form-group">
+                <div class="form-group form-group-ta">
                     <label for="comment">Comment</label>
                     <textarea id="comment" v-model="form.comment" placeholder="Comment" @focus="clearError('comment')"></textarea>
                 </div>
                 <div v-if="form.errors.comment" class="mb-2 text-red-500">{{ form.errors.comment }}</div>
                 
                 <!-- submit -->
-                <div>
+                <div class="mt-4">
                     <jet-button class="bg-purple-600 text-yellow-200" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         <i class="fas fa-save mr-2"></i> Add
                     </jet-button>
@@ -178,6 +178,19 @@ export default {
             grid-column-start: 2;
             grid-column-end: 3;
         }
+    }
+}
+
+.form-group-ta {
+    grid-template-rows: 42px 84px;
+    height: auto;
+
+    textarea {
+        height: 84px;
+    }
+
+    @media (min-width: 768px) {
+        grid-template-rows: 1fr;
     }
 }
 </style>

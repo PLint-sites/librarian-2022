@@ -76,6 +76,15 @@
 
                 <!-- Responsive Navigation Menu -->
                 <div id="mobile-menu" :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+                    <!-- Close button for mobile menu -->
+                    <div class="flex justify-end p-2 border-b border-gray-200">
+                        <button @click="showingNavigationDropdown = false" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                            <svg class="h-6 w-6" stroke="#7b1fa2" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    
                     <div v-if="$page.props.auth.user" class="">
                         <jet-responsive-nav-link :href="route('books')" :active="route().current('books')">
                             <i class="fas fa-book"></i> Books
@@ -212,6 +221,8 @@ nav {
         width: 100%;
         max-width: 1200px;
         padding: 0 15px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     #brand {

@@ -73,6 +73,7 @@ export default {
             h3 {
                 align-self: center;
                 text-transform: uppercase;
+                color: inherit;
             }
 
             ul {

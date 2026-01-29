@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @purple: #7b1fa2;
 @yellow: #ffeb3b;
 

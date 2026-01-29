@@ -13,21 +13,14 @@
         {{-- Icons --}}
         <script src="https://kit.fontawesome.com/48dc4a9b21.js" crossorigin="anonymous"></script>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
         {{-- Favicon --}}
         <link rel="shortcut icon" href="{{ url('favicon.ico') }}">
 
         <!-- Scripts -->
         @routes
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         @inertia
-
-        @env ('local')
-            <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
-        @endenv
     </body>
 </html>

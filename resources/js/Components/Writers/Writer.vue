@@ -15,8 +15,11 @@
                 <button v-if="writer.books.length === 0" class="icon-button" type="button" @click="showDeleteWriterModal = true" style="margin-right: 8px">
                     <i class="fas fa-trash"></i>
                 </button>
-                <button class="icon-button" type="button" @click="showEditWriterModal = true">
+                <button class="icon-button" type="button" @click="showEditWriterModal = true" style="margin-right: 8px">
                     <i class="fas fa-pencil-alt"></i>
+                </button>
+                <button class="icon-button add-book-button" type="button" @click="showAddBookModal = true">
+                    <i class="fas fa-plus"></i>
                 </button>
             </div>
         </div>
@@ -24,21 +27,25 @@
         <EditWriterModal :show-edit-writer-modal="showEditWriterModal" :writer="writer" @modal-closed="showEditWriterModal = false"/>
 
         <DeleteWriterModal :show-delete-writer-modal="showDeleteWriterModal" :writer="writer" @delete-modal-closed="showDeleteWriterModal = false"/>
+
+        <AddBookForWriterModal :show-add-book-modal="showAddBookModal" :writer="writer" :genres="genres" @modal-closed="showAddBookModal = false"/>
     </div>
 </template>
 
 <script>
 import EditWriterModal from './EditWriterModal'
 import DeleteWriterModal from './DeleteWriterModal'
+import AddBookForWriterModal from './AddBookForWriterModal'
 
 export default {
     name: 'Writer',
-    components: {EditWriterModal, DeleteWriterModal},
-    props: ['writer'],
+    components: {EditWriterModal, DeleteWriterModal, AddBookForWriterModal},
+    props: ['writer', 'genres'],
     data() {
         return {
             showEditWriterModal: false,
             showDeleteWriterModal: false,
+            showAddBookModal: false,
         }
     },
     computed: {
@@ -64,7 +71,7 @@ export default {
 
     .name {
         display: grid;
-        grid-template-columns: 1fr 72px;
+        grid-template-columns: 1fr 112px;
         grid-column-gap: 8px;
         font-size: .875rem;
         line-height: 1.375rem;

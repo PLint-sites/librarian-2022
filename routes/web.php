@@ -42,4 +42,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::post('writer', [App\Http\Controllers\WritersController::class, 'store']);
     Route::patch('writer/{writer}', [App\Http\Controllers\WritersController::class, 'update']);
     Route::delete('writer/{writer}', [App\Http\Controllers\WritersController::class, 'delete']);
+    Route::post('writer/{writer}/book', [App\Http\Controllers\WritersController::class, 'storeBookForWriter']);
 });

@@ -25,8 +25,8 @@ class SaveBookForWriterRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:255',
-            'owned' => 'required|min:0|max:1',
-            'completed' => 'required|min:0|max:1',
+            'owned' => 'boolean',
+            'completed' => 'boolean',
             'genre_id' => 'required|min:1',
             'on_loan_to' => 'sometimes|max:255',
         ];

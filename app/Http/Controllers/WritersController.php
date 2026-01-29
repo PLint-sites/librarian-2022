@@ -68,6 +68,11 @@ class WritersController extends Controller
      */
     public function storeBookForWriter(SaveBookForWriterRequest $request, Writer $writer)
     {
+        // Ensure the writer belongs to the authenticated user
+        if ($writer->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $request->merge(['user_id' => Auth::ID(), 'writer_id' => $writer->id]);
 
         // Start reading checked => set date, otherwise, put it on the bookshelf

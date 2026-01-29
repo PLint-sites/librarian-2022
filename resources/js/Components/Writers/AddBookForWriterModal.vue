@@ -93,11 +93,7 @@ export default {
     emits: ['modal-closed'],
     methods: {
         storeBook() {
-            this.form
-            .transform(data => ({
-                ...data,
-            }))
-            .post(`/writer/${this.writer.id}/book`, {
+            this.form.post(`/writer/${this.writer.id}/book`, {
                 onSuccess: () => {
                     this.form.reset()
 
@@ -105,12 +101,6 @@ export default {
                         this.show = false
                     }, 300)
                 },
-                onError: (errors) => {
-                    // Handle validation errors
-                },
-                onFinish: () => {
-                    
-                }
             })
         },
         clearError(field) {

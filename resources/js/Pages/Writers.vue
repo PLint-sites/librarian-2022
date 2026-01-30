@@ -26,7 +26,7 @@
         </template>
 
         <div v-if="hasWritersToShow" id="writerlist">
-            <Writer v-for="writer in writerList" :key="writer.id" :writer="writer"/>
+            <Writer v-for="writer in writerList" :key="writer.id" :writer="writer" :genres="genres"/>
         </div>
 
         <NoSearchResult :search="search" v-else-if="listIsFiltered"/>
@@ -56,7 +56,7 @@ export default {
         NoWriterYet,
         NoSearchResult,
     },
-    props: ['writers'],
+    props: ['writers', 'genres'],
     data() {
         return {
             showAddWriterModal: false,

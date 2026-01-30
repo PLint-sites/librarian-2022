@@ -48,7 +48,7 @@ test('users can authenticate with remember me disabled', function () {
     $this->assertAuthenticated();
     
     // Verify that the remember cookie was not set
-    $this->assertNull($response->headers->getCookies()[Auth::guard()->getRecallerName()] ?? null);
+    $response->assertCookieMissing(Auth::guard()->getRecallerName());
 });
 
 test('users cannot authenticate with invalid password', function () {

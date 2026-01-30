@@ -115,9 +115,14 @@ class BooksController extends Controller
             $request->merge(['start_reading' => Carbon::now()]);
         }
 
-        // if finish checkbox selected, set time finished, pull from bookshelf and mark as completed
-        if ($request->finish_reading) {
-            $request->merge(['finish_reading' => Carbon::now(), 'is_on_bookshelf' => 0, 'completed' => 1]);
+        // if completed checkbox was just checked, set time finished, pull from bookshelf
+        if ($request->has('completed') && $request->completed && !$book->completed) {
+            $request->merge(['finish_reading' => Carbon::now(), 'is_on_bookshelf' => 0]);
+        }
+
+        // if completed checkbox was just unchecked, clear finish_reading
+        if ($request->has('completed') && !$request->completed && $book->completed) {
+            $request->merge(['finish_reading' => null]);
         }
 
         $book->update($request->all());

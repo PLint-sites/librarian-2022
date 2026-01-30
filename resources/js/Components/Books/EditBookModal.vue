@@ -40,7 +40,7 @@
                 </div>
                 <div v-else class="form-group book-checkbox">
                     <label for="book_finish">Finished</label>
-                    <input id="book_finish" type="checkbox" v-model="form.finish_reading">
+                    <input id="book_finish" type="checkbox" v-model="form.completed">
                 </div>
 
                 <!-- owned -->

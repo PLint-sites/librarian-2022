@@ -23,6 +23,9 @@ class Book extends Model
     protected $casts = [
         'start_reading' => 'datetime:Y-m-d',
         'finish_reading' => 'datetime:Y-m-d',
+        'completed' => 'boolean',
+        'owned' => 'boolean',
+        'is_on_bookshelf' => 'boolean',
     ];
 
     /**

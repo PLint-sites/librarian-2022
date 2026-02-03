@@ -1,7 +1,7 @@
 <template>
     <div id="page-title" class="desktop">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Your writers
+            Your authors
         </h2>
 
         <div v-if="hasWriters" id="buttons-and-search">
@@ -22,7 +22,7 @@
             </button>
 
             <div id="search-container">
-                <input type="text" placeholder="Search writer..." @keyup="debounceSearch" v-model="search" ref="searchInput">
+                <input type="text" placeholder="Search author..." @keyup="debounceSearch" v-model="search" ref="searchInput">
                 <button class="icon-button" type="button" @click="resetSearch">
                     <i class="fas fa-times-circle"></i>
                 </button>

@@ -1,7 +1,7 @@
 <template>
     <jet-dialog-modal :show="show" @close="show = false">
         <template #title>
-            <h2 class="text-purple-700">Add writer</h2>
+            <h2 class="text-purple-700">Add author</h2>
         </template>
 
         <template #content>
@@ -21,7 +21,7 @@
                 </div>
 
                 <jet-action-message :on="form.recentlySuccessful" class="mt-3">
-                    Writer added successfully
+                    Author added successfully
                 </jet-action-message>
             </form>
         </template>

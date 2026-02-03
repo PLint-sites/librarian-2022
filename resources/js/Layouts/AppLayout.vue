@@ -19,7 +19,7 @@
                                     <i class="fas fa-book"></i> Books
                                 </jet-nav-link>
                                 <jet-nav-link :href="route('writers')" :active="route().current('writers')">
-                                    <i class="fas fa-pencil-alt"></i> Writers
+                                    <i class="fas fa-pencil-alt"></i> Authors
                                 </jet-nav-link>
                                 <jet-nav-link :href="route('bookshelf')" :active="route().current('bookshelf')">
                                     <i class="fas fa-book-open"></i> Bookshelf
@@ -82,7 +82,7 @@
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link :href="route('writers')" :active="route().current('writers')">
-                            <i class="fas fa-pencil-alt"></i> Writers
+                            <i class="fas fa-pencil-alt"></i> Authors
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link :href="route('bookshelf')" :active="route().current('bookshelf')">

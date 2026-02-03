@@ -8,10 +8,10 @@
         </div>
         <div v-if="form.errors.title" class="mb-2 text-red-500">{{ form.errors.title }}</div>
 
-        <!-- writer -->
+        <!-- author -->
         <div class="form-group">
-            <label for="writer_title">Writer</label>
-            <input id="writer_title" type="text" v-model="form.writer" placeholder="Writer" @focus="clearError('writer')">
+            <label for="writer_title">Author</label>
+            <input id="writer_title" type="text" v-model="form.writer" placeholder="Author" @focus="clearError('writer')">
         </div>
         <div v-if="form.errors.writer" class="mb-2 text-red-500">{{ form.errors.writer }}</div>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="form-group" :class="className">
-        <label for="book_writer">Writer</label>
+        <label for="book_writer">Author</label>
 
         <SelectWriterComboBox 
             :writers="writers" 

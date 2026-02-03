@@ -1,11 +1,11 @@
 <template>
     <jet-confirmation-modal :show="show" @close="show = false">
         <template #title>
-            <h2>Delete writer</h2>
+            <h2>Delete author</h2>
         </template>
 
         <template #content>
-            <p>Are you sure you want to delete this writer? This action can not be undone, use it with care!</p>
+            <p>Are you sure you want to delete this author? This action can not be undone, use it with care!</p>
         </template>
 
         <template #footer>
@@ -19,7 +19,7 @@
                 </jet-button>
 
                 <jet-action-message :on="form.recentlySuccessful" class="mt-4">
-                    Writer deleted successfully
+                    Author deleted successfully
                 </jet-action-message>
             </form>
         </template>

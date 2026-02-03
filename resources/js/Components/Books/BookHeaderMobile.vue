@@ -17,7 +17,7 @@
         </div>
 
         <div id="search-field" v-show="showSearchInput">
-            <input type="text" ref="searchInput" placeholder="Search book/writer..." @keyup="debounceSearch" v-model="search">
+            <input type="text" ref="searchInput" placeholder="Search book/author..." @keyup="debounceSearch" v-model="search">
             <button class="icon-button" type="button" @click="resetSearch">
                 <i class="fas fa-times-circle"></i>
             </button>

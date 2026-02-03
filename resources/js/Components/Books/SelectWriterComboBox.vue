@@ -5,7 +5,7 @@
                 className="w-full"
                 @change="query = $event.target.value" 
                 :displayValue="(writer) => writer ? writer.name : ''"
-                placeholder="Start typing writer's name"
+                placeholder="Start typing author's name"
             />
             <ComboboxOptions
                 :class="{
@@ -14,7 +14,7 @@
                 }"                
             >
                 <span v-if="filteredWriters.length === 0">
-                    No writer found for <b>{{ query }}</b>, let's create a new one
+                    No author found for <b>{{ query }}</b>, let's create a new one
                     <Link :href="route('writers')" class="px-2.5 py-1.5 bg-red-200 rounded-full ml-1">
                         <i class="fas fa-plus"></i>
                     </Link>

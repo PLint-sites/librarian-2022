@@ -13,11 +13,11 @@
                 </div>
                 <div v-if="form.errors.title" class="mb-2 text-red-500">{{ form.errors.title }}</div>
 
-                <!-- writer -->
+                <!-- author -->
                 <div class="form-group">
-                    <label for="book_writer">Writer</label>
+                    <label for="book_writer">Author</label>
                     <select id="book_writer" v-model="form.writer_id" @focus="clearError('writer_id')">
-                        <option disabled value="">Select writer</option>
+                        <option disabled value="">Select author</option>
                         <option v-for="writer in writers" :key="writer.id" :value="writer.id">{{ writer.name }}</option>
                     </select>
                 </div>

@@ -30,11 +30,17 @@ class BooksController extends Controller
         $booksCount = $books->count();
         $books = $books->limit($this->perPage)->get();
 
+        // Count books completed this year
+        $booksReadThisYear = Book::mybooks()
+            ->where('completed', 1)
+            ->whereYear('finish_reading', Carbon::now()->year)
+            ->count();
+
         $writers = Writer::mywriters()->latest()->get();
         $genres = \App\Models\Genre::all();
         $perPage = $this->perPage;
 
-        return Inertia::render('Books', compact('books', 'booksCount', 'writers', 'genres', 'perPage'));
+        return Inertia::render('Books', compact('books', 'booksCount', 'booksReadThisYear', 'writers', 'genres', 'perPage'));
     }
 
     /**

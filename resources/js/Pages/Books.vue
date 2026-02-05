@@ -4,6 +4,7 @@
             <BookHeaderMobile 
                 v-if="smartphoneSize" 
                 :booksCount="numberOfBooks"
+                :booksReadThisYear="booksReadThisYear"
                 :has-books="userHasBooks"
                 @filter-books="filterBooks" 
                 @reset-filter="resetFilter"
@@ -12,6 +13,7 @@
             <BookHeaderDesktop 
                 v-else 
                 :booksCount="numberOfBooks"
+                :booksReadThisYear="booksReadThisYear"
                 :has-books="userHasBooks" 
                 @filter-books="filterBooks" 
                 @reset-filter="resetFilter"
@@ -52,7 +54,7 @@ export default {
         BookHeaderMobile,
         BookHeaderDesktop
     },
-    props: ['books', 'booksCount', 'writers', 'genres', 'perPage'],
+    props: ['books', 'booksCount', 'booksReadThisYear', 'writers', 'genres', 'perPage'],
     data() {
         return {
             observer: null,

@@ -1,26 +1,32 @@
 <template>
-    <div id="page-title" class="mobile">
-        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            Your books ({{ booksCount }})
-        </h1>
-
-        <div v-if="hasBooks" class="buttons">
-            <button class="icon-button" type="button" @click="showModal">
-                <i class="fas fa-plus"></i>
-            </button>
-
-            <Link class="icon-button" href="/bookshelf" as="button"><i class="fas fa-book-open"></i></Link>
-            
-            <button class="icon-button" type="button" @click="showSearch">
-                <i class="fas fa-search"></i>
-            </button>
+    <div>
+        <div v-if="booksReadThisYear !== undefined" class="books-read-metric-mobile">
+            📚 {{ booksReadThisYear }} {{ booksReadThisYear === 1 ? 'book' : 'books' }} read this year
         </div>
+        
+        <div id="page-title" class="mobile">
+            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
+                Your books ({{ booksCount }})
+            </h1>
 
-        <div id="search-field" v-show="showSearchInput">
-            <input type="text" ref="searchInput" placeholder="Search book/author..." @keyup="debounceSearch" v-model="search">
-            <button class="icon-button" type="button" @click="resetSearch">
-                <i class="fas fa-times-circle"></i>
-            </button>
+            <div v-if="hasBooks" class="buttons">
+                <button class="icon-button" type="button" @click="showModal">
+                    <i class="fas fa-plus"></i>
+                </button>
+
+                <Link class="icon-button" href="/bookshelf" as="button"><i class="fas fa-book-open"></i></Link>
+                
+                <button class="icon-button" type="button" @click="showSearch">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div id="search-field" v-show="showSearchInput">
+                <input type="text" ref="searchInput" placeholder="Search book/author..." @keyup="debounceSearch" v-model="search">
+                <button class="icon-button" type="button" @click="resetSearch">
+                    <i class="fas fa-times-circle"></i>
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -33,7 +39,7 @@ export default {
     components: {
         Link,
     },
-    props: ['booksCount', 'hasBooks'],
+    props: ['booksCount', 'booksReadThisYear', 'hasBooks'],
     data() {
         return {
             showSearchInput: false,
@@ -75,6 +81,19 @@ export default {
 
 .icon-button i.fas {
     pointer-events: none;
+}
+
+.books-read-metric-mobile {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 12px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    margin-left: -0.9rem;
+    margin-right: -0.9rem;
+    margin-top: -15px;
+    margin-bottom: 15px;
 }
 
 #page-title {

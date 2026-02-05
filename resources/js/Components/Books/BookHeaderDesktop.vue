@@ -1,5 +1,9 @@
 <template>
     <div id="page-title" class="desktop">
+        <div v-if="booksReadThisYear !== undefined" class="books-read-metric">
+            📚 {{ booksReadThisYear }} {{ booksReadThisYear === 1 ? 'book' : 'books' }} read this year
+        </div>
+
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             Your books ({{ booksCount }})
         </h1>
@@ -27,7 +31,7 @@ export default {
     components: {
         Link,
     },
-    props: ['booksCount', 'hasBooks'],
+    props: ['booksCount', 'booksReadThisYear', 'hasBooks'],
     data() {
         return {
             search: '',
@@ -58,6 +62,18 @@ export default {
 
 <style lang="less" scoped>
 @purple: #7b1fa2;
+
+.books-read-metric {
+    grid-column-start: span 2;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
 
 #page-title {
     grid-template-columns: auto 320px;

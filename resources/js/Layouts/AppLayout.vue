@@ -229,23 +229,20 @@ nav {
         }
     }
 
-    a {
-        text-transform: uppercase;
-        color: yellow;
-        border-color: yellow;
-    }
-
-    #logout-link {
-        padding: 0.5rem 1rem;
-        color: rgb(55 65 81 / var(--tw-text-opacity));
-    }
-
     #mobile-menu {
         background: white;
         box-shadow: 3px 3px 20px @purple;
 
         a {
             text-transform: capitalize;
+
+            i {
+                width: 18px;
+            }
+        }
+
+        button i {
+            width: 18px;
         }
     }
 }

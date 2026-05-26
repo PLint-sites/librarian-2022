@@ -20,13 +20,21 @@ class Book extends Model
 
     protected $appends = ['start_reading_date'];
 
-    protected $casts = [
-        'start_reading' => 'datetime:Y-m-d',
-        'finish_reading' => 'datetime:Y-m-d',
-        'completed' => 'boolean',
-        'owned' => 'boolean',
-        'is_on_bookshelf' => 'boolean',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'start_reading' => 'datetime:Y-m-d',
+            'finish_reading' => 'datetime:Y-m-d',
+            'completed' => 'boolean',
+            'owned' => 'boolean',
+            'is_on_bookshelf' => 'boolean',
+        ];
+    }
 
     /**
      * Get the user that owns the book.

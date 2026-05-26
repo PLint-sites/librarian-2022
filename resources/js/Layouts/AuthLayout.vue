@@ -71,8 +71,6 @@ nav {
 
     a {
         text-transform: uppercase;
-        color: yellow;
-        border-color: yellow;
 
         i {
             margin-right: 5px;

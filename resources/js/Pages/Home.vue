@@ -30,10 +30,12 @@
                 <h2 class="title">Start now</h2>
 
                 <p>
-                    Register by clicking the button below. It's <b>free</b>. Already have an account? <a :href="route('login')">Sign in</a> 
+                    Register by clicking the button below. It's <b>free</b>.
                 </p>
 
                 <a class="btn" :href="route('register')"><i class="fas fa-user-plus"></i> Register</a>
+                <br>
+                <small>Already have an account? <a :href="route('login')">Sign in</a></small>
             </div>
         </div>
     </home-layout>
@@ -67,8 +69,25 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 13px;
 
     #home-content {
-        padding: 0 15px 15px 15px;
-    }
+        padding: 15px;
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background: var(--yellow);
+            color: var(--purple);
+            text-transform: uppercase;
+            padding: 4px 10px;
+            font-size: .8rem;
+            border-radius: 4px;
+
+            i.fas {
+                margin-right: 3px;
+            }
+        }
+            }
 
     p {
         margin-bottom: 15px;

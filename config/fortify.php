@@ -61,15 +61,7 @@ return [
     |
     */
 
-    'home' => function() {
-        // Redirect to onboarding page after initial registration
-        if (Auth::user()->is_onboarded == 0) {
-            return '/add-your-first-book';
-        }
-
-        // Redirect to writers if no writers for this user yet.
-        return Auth::user()->writers->count() == 0 ? '/writers' : '/books';
-    },
+    'home' => '/books',
 
     /*
     |--------------------------------------------------------------------------

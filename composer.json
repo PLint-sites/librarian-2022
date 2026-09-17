@@ -9,7 +9,7 @@
         "guzzlehttp/guzzle": "7.15.5",
         "inertiajs/inertia-laravel": "3.1.0",
         "laravel/framework": "13.28.0",
-        "laravel/jetstream": "5.5.2",
+        "laravel/jetstream": "^5.5.2",
         "laravel/sanctum": "4.3.2",
         "league/flysystem-aws-s3-v3": "3.34.0",
         "spatie/laravel-backup": "10.2.1",

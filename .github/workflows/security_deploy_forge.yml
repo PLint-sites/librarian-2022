@@ -1,0 +1,40 @@
+# This workflow deploys main to Forge. It is dispatched by the "Dependabot security - merge PR"
+# workflow after it merges a PR, and can also be triggered manually.
+name: Dependabot security - deploy to Forge
+
+on:
+  # Dispatched by the merge workflow or manually; GITHUB_TOKEN merges don't trigger pull_request events
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy main to Forge'
+        required: true
+        type: boolean
+        default: false
+
+# Ensures that only one deployment runs at a time for the production environment
+# This prevents 2 dependabot PRs from triggering simultaneous deployments
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy-to-forge:
+    # Only run when the deploy checkbox is checked
+    if: inputs.deploy == true
+
+    runs-on: ubuntu-latest
+
+    # The job only calls the Forge webhook and needs no GitHub token access
+    permissions: {}
+
+    steps:
+      # Trigger the deployment to Forge, using the webhook URL stored in the repository secrets
+      - name: Trigger Forge deployment
+        run: |
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            -X POST \
+            "${{ secrets.FORGE_DEPLOY_WEBHOOK }}"

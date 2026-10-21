@@ -1,0 +1,142 @@
+name: Dependabot security - merge PR
+
+on:
+  workflow_run:
+    workflows:
+      # Only runs after the workflow with this name has completed successfully
+      - Dependabot security - run tests
+    types:
+      - completed
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  merge:
+    name: merge
+    runs-on: ubuntu-latest
+
+    # Only continue when the test workflow succeeded.
+    if: github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Find the exact pull request
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+
+          PR_JSON=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${REPO}/commits/${RUN_SHA}/pulls" \
+            --jq '[.[] | select(.state == "open" and .head.sha == "'"${RUN_SHA}"'")]')
+
+          PR_COUNT=$(echo "$PR_JSON" | jq 'length')
+
+          if [ "$PR_COUNT" -ne 1 ]; then
+            echo "Expected exactly one pull request for this workflow run."
+            echo "$PR_JSON"
+            exit 1
+          fi
+
+          PR_NUMBER=$(echo "$PR_JSON" | jq -r '.[0].number')
+          PR_SHA=$(echo "$PR_JSON" | jq -r '.[0].head.sha')
+          PR_AUTHOR=$(echo "$PR_JSON" | jq -r '.[0].user.login')
+          PR_BASE=$(echo "$PR_JSON" | jq -r '.[0].base.ref')
+          PR_BRANCH=$(echo "$PR_JSON" | jq -r '.[0].head.ref')
+
+          echo "PR number: $PR_NUMBER"
+          echo "PR head SHA: $PR_SHA"
+          echo "PR author: $PR_AUTHOR"
+          echo "PR base: $PR_BASE"
+          echo "PR branch: $PR_BRANCH"
+
+          if [ "$PR_AUTHOR" != "dependabot[bot]" ]; then
+            echo "PR was not created by Dependabot."
+            exit 1
+          fi
+
+          if [ "$PR_BASE" != "main" ]; then
+            echo "PR does not target main."
+            exit 1
+          fi
+
+          case "$PR_BRANCH" in
+            dependabot/npm_and_yarn/*|dependabot/composer/*) ;;
+            *)
+              echo "PR branch is not a Dependabot npm or composer update."
+              exit 1
+              ;;
+          esac
+
+          echo "number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "sha=$PR_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Verify the PR is still open, unchanged and from Dependabot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+        run: |
+          set -euo pipefail
+
+          PR_JSON=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${REPO}/pulls/${PR_NUMBER}")
+
+          STATE=$(echo "$PR_JSON" | jq -r '.state')
+          AUTHOR=$(echo "$PR_JSON" | jq -r '.user.login')
+          BASE=$(echo "$PR_JSON" | jq -r '.base.ref')
+          HEAD_SHA=$(echo "$PR_JSON" | jq -r '.head.sha')
+
+          if [ "$STATE" != "open" ]; then
+            echo "PR is no longer open."
+            exit 1
+          fi
+
+          if [ "$AUTHOR" != "dependabot[bot]" ]; then
+            echo "PR is not from Dependabot."
+            exit 1
+          fi
+
+          if [ "$BASE" != "main" ]; then
+            echo "PR does not target main."
+            exit 1
+          fi
+
+          if [ "$HEAD_SHA" != "${{ steps.pr.outputs.sha }}" ]; then
+            echo "PR has changed since the successful test run."
+            exit 1
+          fi
+
+      - name: Merge exact pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+        run: |
+          set -euo pipefail
+
+          gh pr merge "$PR_NUMBER" \
+            --repo "$REPO" \
+            --squash \
+            --delete-branch
+
+      # Merges made with GITHUB_TOKEN don't trigger other workflows, except via workflow_dispatch
+      # Hence, we trigger the auto_deploy_forge workflow here
+      - name: Trigger Forge deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          gh workflow run security_deploy_forge.yml \
+            --repo "$REPO" \
+            --ref main \
+            -f deploy=true
